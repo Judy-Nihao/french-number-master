@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   Volume2,
-  RefreshCw,
   CheckCircle2,
   XCircle,
   Settings2,
   ArrowRight,
   Loader2,
+  Search,
+  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
@@ -29,6 +30,8 @@ export default function App() {
     word: string;
     ipa: string;
   } | null>(null);
+  const [isLookupOpen, setIsLookupOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const poolRef = useRef<number[]>([]);
   const lastNumberRef = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -80,6 +83,14 @@ export default function App() {
   useEffect(() => {
     generateRandomNumber();
   }, [generateRandomNumber]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   const handleLookup = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -247,7 +258,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 overflow-x-hidden">
+    <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 pb-20 sm:pb-12 overflow-x-hidden">
       <div className="w-full max-w-md flex flex-col relative">
         {/* Organic Background Shape - Top Left */}
         <div className="absolute -top-20 -left-20 w-64 h-64 bg-app-primary/10 rounded-full blur-3xl -z-10" />
@@ -305,7 +316,7 @@ export default function App() {
 
         {/* Main Exercise Card */}
         <div className="bg-app-card rounded-[3rem] border-2 border-app-border shadow-xl shadow-app-primary/5 overflow-hidden relative">
-          <div className="p-8 flex flex-col items-center relative z-10">
+          <div className="px-8 py-7 flex flex-col items-center relative z-10">
             <motion.div
               key={currentNumber}
               initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
@@ -438,66 +449,119 @@ export default function App() {
           </AnimatePresence>
         </div>
 
-        {/* Direct Lookup Section */}
-        <div className="mt-8 bg-white/50 backdrop-blur-sm rounded-4xl border-2 border-app-border p-6 shadow-lg">
-          <div className="flex items-center gap-2 mb-4">
-            <RefreshCw size={18} className="text-app-primary" />
-            <h2 className="text-lg font-bold text-app-dark">Direct Lookup</h2>
-          </div>
-          <div className="space-y-4">
-            <input
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              value={lookupValue}
-              onChange={handleLookup}
-              placeholder="Enter any number..."
-              className="w-full px-4 py-3 rounded-xl border-2 border-app-border focus:border-app-primary focus:outline-none transition-all font-medium"
-            />
+      </div>
 
-            <AnimatePresence>
-              {lookupResult && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="overflow-hidden"
+      {/* Bottom Tab Bar */}
+      <button
+        onClick={() => {
+          setLookupValue("");
+          setLookupResult(null);
+          setIsLookupOpen(true);
+        }}
+        aria-label="Direct lookup"
+        className="fixed bottom-0 left-0 right-0 z-40 bg-app-dark text-white flex items-center justify-center gap-2 py-4 rounded-t-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.12)] active:opacity-80 transition-opacity"
+      >
+        <Search size={16} />
+        <span className="text-sm font-bold tracking-wider">Number → French</span>
+      </button>
+
+      {/* Lookup Drawer / Dialog */}
+      <AnimatePresence>
+        {isLookupOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsLookupOpen(false)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
+            />
+            <motion.div
+              initial={isDesktop ? { opacity: 0, scale: 0.95 } : { y: "100%" }}
+              animate={isDesktop ? { opacity: 1, scale: 1 } : { y: 0 }}
+              exit={isDesktop ? { opacity: 0, scale: 0.95 } : { y: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 320 }}
+              className={cn(
+                "fixed z-50 bg-app-card w-full p-6 shadow-2xl",
+                isDesktop
+                  ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-md rounded-3xl"
+                  : "bottom-0 left-0 right-0 rounded-t-3xl pb-10 min-h-[30vh]",
+              )}
+            >
+              {/* Panel Header */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2">
+                  <Search size={18} className="text-app-primary" />
+                  <h2 className="text-lg font-bold text-app-dark">
+                    Number → French
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setIsLookupOpen(false)}
+                  className="p-2 rounded-full hover:bg-app-border transition-colors"
                 >
-                  <div className="bg-app-primary-light/30 rounded-xl p-4 border border-app-primary/10">
-                    <div className="flex justify-between items-start gap-2">
-                      <div className="flex-1">
-                        <div className="text-xl font-bold text-app-dark mb-1 wrap-break-word">
-                          {lookupResult.word}
-                        </div>
-                        <div className="text-xs font-medium text-app-dark/50 italic mb-2">
-                          {lookupResult.ipa}
+                  <X size={18} className="text-app-dark/50" />
+                </button>
+              </div>
+
+              {/* Lookup Input */}
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  value={lookupValue}
+                  onChange={handleLookup}
+                  placeholder="Enter any number..."
+                  autoFocus
+                  className="w-full px-4 py-3 rounded-xl border-2 border-app-border focus:border-app-primary focus:outline-none transition-all font-medium"
+                />
+
+                <AnimatePresence>
+                  {lookupResult && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="bg-app-primary-light/30 rounded-xl p-4 border border-app-primary/10">
+                        <div className="flex justify-between items-start gap-2">
+                          <div className="flex-1">
+                            <div className="text-xl font-bold text-app-dark mb-1 wrap-break-word">
+                              {lookupResult.word}
+                            </div>
+                            <div className="text-xs font-medium text-app-dark/50 italic">
+                              {lookupResult.ipa}
+                            </div>
+                          </div>
+                          <button
+                            onClick={playLookupAudio}
+                            disabled={isPlaying}
+                            className="p-3 rounded-full bg-white shadow-sm hover:text-app-primary transition-all disabled:opacity-50"
+                          >
+                            {isPlaying ? (
+                              <Loader2
+                                size={18}
+                                className="text-app-primary animate-spin"
+                              />
+                            ) : (
+                              <Volume2
+                                size={18}
+                                className="text-app-dark hover:text-app-primary"
+                              />
+                            )}
+                          </button>
                         </div>
                       </div>
-                      <button
-                        onClick={playLookupAudio}
-                        disabled={isPlaying}
-                        className="p-3 rounded-full bg-white shadow-sm hover:text-app-primary transition-all disabled:opacity-50"
-                      >
-                        {isPlaying ? (
-                          <Loader2
-                            size={18}
-                            className="text-app-primary animate-spin"
-                          />
-                        ) : (
-                          <Volume2
-                            size={18}
-                            className="text-app-dark hover:text-app-primary"
-                          />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
