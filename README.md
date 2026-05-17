@@ -1,5 +1,7 @@
 # French Number Master
 
+Live demo: https://french-number-master.vercel.app/
+
 A client-side web app for practicing French number dictation.
 
 ## Why No API?
