@@ -31,6 +31,14 @@ npm install
 npm run dev
 ```
 
+## UI Architecture and Maintenance
+
+Shared inputs, buttons and cards live in `src/components/ui/`; practice views live in `src/components/practice/`. State and speech logic live in `src/hooks/`. Components and named functions use arrow functions.
+
+Colors, radii, border widths and shadows are centralized in `src/index.css`. Extend component variants for reusable differences rather than copying style classes.
+
+Run `npm run lint` for TypeScript checks and `npm run build` for the production build.
+
 ---
 
 # French Number Master（中文）
@@ -63,3 +71,11 @@ npm run dev
 npm install
 npm run dev
 ```
+
+## 元件架構與維護
+
+共用 input、按鈕與卡片位於 `src/components/ui/`，功能介面位於 `src/components/practice/`；狀態與語音邏輯位於 `src/hooks/`。元件與具名函式統一使用 arrow function。
+
+顏色、圓角、線條粗細與陰影集中於 `src/index.css`。可重複使用的樣式差異以元件 variant 擴充，避免複製 class。
+
+使用 `npm run lint` 執行 TypeScript 檢查、`npm run build` 執行正式打包。
