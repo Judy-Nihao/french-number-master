@@ -1,8 +1,11 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
-type RangeUpdateAlertProps = { visible: boolean };
+type FloatingNoticeProps = { visible: boolean; message?: string };
 
-export const RangeUpdateAlert = ({ visible }: RangeUpdateAlertProps) => {
+export const FloatingNotice = ({
+  visible,
+  message = "Don't forget to update!",
+}: FloatingNoticeProps) => {
   const reducedMotion = useReducedMotion();
   return (
     <div
@@ -15,7 +18,7 @@ export const RangeUpdateAlert = ({ visible }: RangeUpdateAlertProps) => {
         {visible && (
           // Motion retains the notice through its exit and disables movement for reduced motion.
           <motion.div
-            key="range-update"
+            key="input-notice"
             initial={{ opacity: 0, y: reducedMotion ? 0 : -32 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reducedMotion ? 0 : -24 }}
@@ -36,7 +39,7 @@ export const RangeUpdateAlert = ({ visible }: RangeUpdateAlertProps) => {
               }
               className="rounded-pill border-control border-app-border bg-app-notice px-4 py-2 text-center text-[11px] font-medium tracking-wide text-app-dark/65"
             >
-              <span>Don't forget to update!</span>
+              <span>{message}</span>
             </motion.div>
           </motion.div>
         )}

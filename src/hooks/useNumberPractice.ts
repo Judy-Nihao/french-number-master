@@ -6,6 +6,15 @@ import { getFrenchRepresentation } from "../utils/frenchConverter";
 import type { PracticeMode, FrenchRepresentation } from "../types";
 
 export const useNumberPractice = () => {
+  const [keyboardHint, setKeyboardHint] = useState(false);
+  // Composition alone is not an error: Latin accents may also use an IME.
+  const hasNonLatinText = (value: string) =>
+    /[^\p{Script=Latin}\p{M}\p{N}\p{P}\p{Z}\s]/u.test(value);
+  const handleCompositionUpdate = (event: React.CompositionEvent) => {
+    if (hasNonLatinText(event.data)) setKeyboardHint(true);
+  };
+  const dismissKeyboardHint = () => setKeyboardHint(false);
+
   const [minRange, setMinRange] = useState(0);
   const [maxRange, setMaxRange] = useState(20);
   const [tempMin, setTempMin] = useState<number | string>(0);
@@ -65,6 +74,7 @@ export const useNumberPractice = () => {
       lastNumberRef.current = random;
     }
 
+    setKeyboardHint(false);
     setUserInput("");
     setFeedback(null);
     setTimeout(() => inputRef.current?.focus(), 100);
@@ -77,6 +87,7 @@ export const useNumberPractice = () => {
   const handleLookup = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     if (val === "" || /^\d+$/.test(val)) {
+      setKeyboardHint(false);
       setLookupValue(val);
       if (val !== "") {
         const num = parseInt(val);
@@ -88,6 +99,8 @@ export const useNumberPractice = () => {
       } else {
         setLookupResult(null);
       }
+    } else if (hasNonLatinText(val)) {
+      setKeyboardHint(true);
     }
   };
 
@@ -100,7 +113,10 @@ export const useNumberPractice = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const val = e.target.value;
       if (val === "" || /^\d+$/.test(val)) {
+        setKeyboardHint(false);
         setter(val);
+      } else if (hasNonLatinText(val)) {
+        setKeyboardHint(true);
       }
     };
 
@@ -110,7 +126,10 @@ export const useNumberPractice = () => {
     // 允許：a-z, A-Z, 0-9 (以防萬一), 空格, 連字號, 以及法文重音符號
     const frenchRegex = /^[a-zA-Z0-9\s\-éàèêëîïôûùçÉÀÈÊËÎÏÔÛÙÇ]*$/;
     if (frenchRegex.test(val)) {
+      setKeyboardHint(false);
       setUserInput(val);
+    } else if (hasNonLatinText(val)) {
+      setKeyboardHint(true);
     }
   };
 
@@ -192,6 +211,9 @@ export const useNumberPractice = () => {
   };
 
   return {
+    keyboardHint,
+    handleCompositionUpdate,
+    dismissKeyboardHint,
     minRange,
     maxRange,
     tempMin,

@@ -1,4 +1,4 @@
-import { RangeUpdateAlert } from "./components/practice/RangeUpdateAlert";
+import { FloatingNotice } from "./components/practice/FloatingNotice";
 import { Card } from "./components/ui/Card";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
 import { ModeTabs } from "./components/ModeTabs";
@@ -12,18 +12,24 @@ const App = () => {
   const { mode, setMode, reducedMotion } = practice;
   return (
     <MotionConfig reducedMotion="user">
-      <RangeUpdateAlert
+      <FloatingNotice
+        message={
+          practice.keyboardHint
+            ? "Switch to a Latin alphabet keyboard."
+            : undefined
+        }
         visible={
-          mode === "test" &&
-          (practice.minRange !== Number(practice.tempMin) ||
-            practice.maxRange !== Number(practice.tempMax))
+          practice.keyboardHint ||
+          (mode === "test" &&
+            (practice.minRange !== Number(practice.tempMin) ||
+              practice.maxRange !== Number(practice.tempMax)))
         }
       />
       <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 overflow-x-clip">
         <div className="w-full max-w-lg flex flex-col relative">
           {/* Header */}
           <header className="mb-4 text-center">
-            <h1 className="font-display text-2xl md:text-5xl font-medium italic text-app-dark">
+            <h1 className="font-display text-3xl md:text-5xl font-medium italic text-app-dark">
               French Number Master
             </h1>
           </header>

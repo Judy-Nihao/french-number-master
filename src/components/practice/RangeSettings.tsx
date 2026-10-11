@@ -7,6 +7,8 @@ import type { PracticeController } from "../../hooks/useNumberPractice";
 
 type RangeSettingsProps = Pick<
   PracticeController,
+  | "handleCompositionUpdate"
+  | "dismissKeyboardHint"
   | "mode"
   | "tempMin"
   | "tempMax"
@@ -24,12 +26,14 @@ export const RangeSettings = ({
   setTempMax,
   handleRangeInput,
   handleUpdateRange,
+  handleCompositionUpdate,
+  dismissKeyboardHint,
 }: RangeSettingsProps) => (
   <fieldset
     disabled={mode === "lookup"}
     aria-label="Practice range"
     className={cn(
-      "min-w-0 mb-6 border-0 p-0 transition-opacity",
+      "min-w-0 border-0 p-0 transition-opacity",
       mode === "lookup" && "grayscale opacity-60",
     )}
   >
@@ -39,6 +43,8 @@ export const RangeSettings = ({
     >
       <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 sm:gap-2 min-w-0 sm:flex sm:flex-1 sm:justify-center">
         <NumberInput
+          onCompositionUpdate={handleCompositionUpdate}
+          onBlur={dismissKeyboardHint}
           variant="range"
           aria-label="Minimum practice number"
           value={tempMin}
@@ -47,6 +53,8 @@ export const RangeSettings = ({
         />
         <span className="text-app-dark/30 text-xs font-bold">to</span>
         <NumberInput
+          onCompositionUpdate={handleCompositionUpdate}
+          onBlur={dismissKeyboardHint}
           variant="range"
           aria-label="Maximum practice number"
           value={tempMax}

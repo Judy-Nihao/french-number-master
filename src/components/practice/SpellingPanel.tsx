@@ -31,6 +31,8 @@ type SpellingPanelProps = Pick<
   | "handleCheck"
   | "generateRandomNumber"
   | "playAudio"
+  | "handleCompositionUpdate"
+  | "dismissKeyboardHint"
   | "isPlaying"
 >;
 
@@ -45,6 +47,8 @@ export const SpellingPanel = ({
   generateRandomNumber,
   playAudio,
   isPlaying,
+  handleCompositionUpdate,
+  dismissKeyboardHint,
 }: SpellingPanelProps) => (
   <AnimatedHeight
     id="test-panel"
@@ -69,6 +73,8 @@ export const SpellingPanel = ({
       <div className="w-full flex flex-col gap-4">
         <div className="relative group">
           <AutoResizeTextarea
+            onCompositionUpdate={handleCompositionUpdate}
+            onBlur={dismissKeyboardHint}
             state={feedback ?? "default"}
             aria-label="French spelling"
             ref={inputRef}
