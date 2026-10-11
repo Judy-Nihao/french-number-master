@@ -49,8 +49,7 @@ export const ModeTabs = ({
       ref={trackRef}
       role="tablist"
       aria-label="Number practice mode"
-      className="relative mt-6 grid grid-cols-2 rounded-pill border-control border-app-border bg-app-card p-1 select-none"
-      style={{ touchAction: "pan-y" }}
+      className="relative mt-6 grid grid-cols-2 rounded-pill border-control border-app-border bg-app-card p-1 select-none touch-pan-y"
       onPanStart={() => {
         dragStart.current = x.get();
       }}
@@ -73,10 +72,11 @@ export const ModeTabs = ({
         );
       }}
     >
+      {/* MotionValue drives continuous drag and velocity-based spring snapping without React rerenders. */}
       <motion.div
         aria-hidden="true"
-        className="absolute left-1 top-1 bottom-1 rounded-pill bg-app-dark pointer-events-none"
-        style={{ x, width: "calc((100% - 8px) / 2)" }}
+        className="absolute left-1 top-1 bottom-1 rounded-pill bg-app-dark pointer-events-none w-[calc((100%-8px)/2)]"
+        style={{ x }}
       />
       {(["test", "lookup"] as const).map((tabMode) => (
         <button
