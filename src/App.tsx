@@ -271,64 +271,66 @@ export default function App() {
             </h1>
           </header>
 
-          {/* Range Settings - Clean Pill Card */}
-          <AnimatePresence initial={false}>
-            {mode === "test" && (
-              <motion.div
-                className="overflow-hidden"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: reducedMotion ? 0 : 0.2 }}
-              >
-                <div className="mb-6">
-                  <div className="bg-app-card p-4 sm:p-3 rounded-4xl border-2 border-app-border flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-3 shadow-sm">
-                    <div className="flex items-center gap-2 pl-2">
-                      <Settings2 size={18} className="text-app-primary" />
-                      <span className="text-xs font-bold text-app-dark/60 uppercase tracking-wider">
-                        Range
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 sm:gap-2 flex-1 justify-center">
-                      <input
-                        type="text"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        aria-label="Minimum practice number"
-                        value={tempMin}
-                        onChange={handleRangeInput(setTempMin)}
-                        className="w-24 sm:w-20 px-2 py-2 bg-app-primary-light border-2 border-transparent rounded-2xl text-center text-sm font-bold text-app-primary focus:outline-none focus:border-app-primary transition-all"
-                      />
-                      <span className="text-app-dark/30 text-xs font-bold">
-                        to
-                      </span>
-                      <input
-                        type="text"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        aria-label="Maximum practice number"
-                        value={tempMax}
-                        onChange={handleRangeInput(setTempMax)}
-                        className="w-24 sm:w-20 px-2 py-2 bg-app-primary-light border-2 border-transparent rounded-2xl text-center text-sm font-bold text-app-primary focus:outline-none focus:border-app-primary transition-all"
-                      />
-                    </div>
-                    <button
-                      onClick={handleUpdateRange}
-                      className="w-full sm:w-auto px-8 sm:px-5 py-3 sm:py-2.5 bg-app-dark text-white rounded-full text-xs font-bold hover:scale-105 active:scale-95 transition-all shadow-md"
-                    >
-                      Update
-                    </button>
-                  </div>
-                  {(minRange !== Number(tempMin) ||
-                    maxRange !== Number(tempMax)) && (
-                    <p className="text-[10px] text-app-primary mt-2 font-bold text-center animate-bounce">
-                      Don't forget to update!
-                    </p>
-                  )}
-                </div>
-              </motion.div>
+          {/* Range settings */}
+          <fieldset
+            disabled={mode === "lookup"}
+            aria-label="Practice range"
+            className={cn(
+              "min-w-0 border-0 p-0 transition-opacity",
+              mode === "lookup" && "grayscale opacity-60",
             )}
-          </AnimatePresence>
+          >
+            <div className="bg-app-card p-4 rounded-4xl border-2 border-app-border grid grid-cols-1 sm:flex items-center gap-2 sm:gap-3">
+              <div className="flex items-center justify-center sm:justify-start gap-2 sm:shrink-0">
+                <Settings2 size={16} className="text-app-dark/60" />
+                <span className="text-xs font-medium text-app-dark/70">
+                  Range
+                </span>
+              </div>
+              <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 min-w-0 sm:flex-1">
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  aria-label="Minimum practice number"
+                  value={tempMin}
+                  onChange={handleRangeInput(setTempMin)}
+                  className="w-full min-w-0 h-11 px-2 bg-app-primary-light/50 border border-transparent rounded-2xl text-center text-sm font-medium text-app-dark focus:outline-none focus:border-app-primary transition-colors disabled:cursor-not-allowed"
+                />
+                <span className="text-app-dark/60 text-xs">to</span>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  aria-label="Maximum practice number"
+                  value={tempMax}
+                  onChange={handleRangeInput(setTempMax)}
+                  className="w-full min-w-0 h-11 px-2 bg-app-primary-light/50 border border-transparent rounded-2xl text-center text-sm font-medium text-app-dark focus:outline-none focus:border-app-primary transition-colors disabled:cursor-not-allowed"
+                />
+              </div>
+              <button
+                onClick={handleUpdateRange}
+                className="w-full sm:w-auto shrink-0 h-11 px-4 bg-transparent text-app-dark/80 border border-app-border rounded-2xl text-xs font-semibold hover:bg-app-primary-light hover:border-app-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-primary disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-app-border"
+              >
+                Update
+              </button>
+            </div>
+            <p
+              aria-hidden={
+                mode === "lookup" ||
+                (minRange === Number(tempMin) && maxRange === Number(tempMax))
+              }
+              className={cn(
+                "text-[10px] text-app-primary mt-2 font-bold text-center h-4",
+                mode === "test" &&
+                  (minRange !== Number(tempMin) || maxRange !== Number(tempMax))
+                  ? "animate-bounce"
+                  : "invisible",
+              )}
+            >
+              Don't forget to update!
+            </p>
+          </fieldset>
 
           {/* Main Exercise Card */}
           <div className="min-h-84 shrink-0 bg-app-card rounded-4xl border-2 border-app-border shadow-xl shadow-app-primary/5 overflow-hidden relative">
