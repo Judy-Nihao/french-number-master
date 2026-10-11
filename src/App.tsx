@@ -331,15 +331,10 @@ export default function App() {
           </AnimatePresence>
 
           {/* Main Exercise Card */}
-          <motion.div
-            layout="size"
-            transition={{ duration: reducedMotion ? 0 : 0.28 }}
-            className="bg-app-card rounded-[3rem] border-2 border-app-border shadow-xl shadow-app-primary/5 overflow-hidden relative"
-          >
+          <div className="min-h-84 shrink-0 bg-app-card rounded-4xl border-2 border-app-border shadow-xl shadow-app-primary/5 overflow-hidden relative">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={mode}
-              layout="position"
                 initial={{
                   opacity: 0,
                   x: reducedMotion ? 0 : mode === "lookup" ? 18 : -18,
@@ -509,7 +504,7 @@ export default function App() {
                     role="tabpanel"
                     aria-labelledby="lookup-tab"
                     tabIndex={0}
-                    className="px-8 py-7 min-h-72"
+                    className="px-8 py-7"
                   >
                     <div className="flex items-center gap-2 mb-6">
                       <Search size={20} className="text-app-primary" />
@@ -570,7 +565,7 @@ export default function App() {
                 )}
               </motion.div>
             </AnimatePresence>
-          </motion.div>
+          </div>
           <ModeTabs mode={mode} onChange={setMode} />
         </div>
       </div>
