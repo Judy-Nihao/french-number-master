@@ -62,7 +62,7 @@ export const AutoResizeTextarea = ({
         "w-full focus:outline-none",
         inputVariants.answer,
         inputStates[state],
-        "block resize-none overflow-hidden pr-14 transition-colors wrap-anywhere",
+        "block resize-none overflow-hidden transition-colors wrap-anywhere",
         multiline ? "rounded-field" : "rounded-pill",
         className,
       )}
