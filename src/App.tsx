@@ -15,7 +15,7 @@ const App = () => {
         <div className="w-full max-w-lg flex flex-col relative">
           {/* Header */}
           <header className="mb-6 text-center">
-            <h1 className="font-display text-4xl font-semibold  text-app-dark">
+            <h1 className="font-display text-5xl font-medium italic text-app-dark">
               French Number Master
             </h1>
           </header>
