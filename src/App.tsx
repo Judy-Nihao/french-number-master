@@ -381,7 +381,7 @@ export default function App() {
                             placeholder="Type in French..."
                             disabled={feedback !== null}
                             className={cn(
-                              "w-full px-6 py-4 rounded-full border-4 transition-all duration-300 text-lg font-medium focus:outline-none placeholder:text-app-dark/20",
+                              "w-full px-6 py-4 rounded-full border transition-all duration-300 text-lg font-medium focus:outline-none placeholder:text-app-dark/20",
                               feedback === "correct"
                                 ? "border-app-primary bg-app-primary-light text-app-primary"
                                 : feedback === "incorrect"
@@ -512,21 +512,16 @@ export default function App() {
                         Number → French
                       </h2>
                     </div>
-                    <label
-                      htmlFor="lookup-number"
-                      className="block text-sm font-medium text-app-dark mb-3"
-                    >
-                      Enter a number
-                    </label>
                     <input
                       id="lookup-number"
+                      aria-label="Enter a number"
                       type="text"
                       inputMode="numeric"
                       pattern="[0-9]*"
                       value={lookupValue}
                       onChange={handleLookup}
                       placeholder="Enter any number..."
-                      className="w-full px-5 py-4 rounded-full border-4 border-app-border focus:border-app-primary focus:outline-none transition-colors font-medium"
+                      className="w-full px-5 py-4 rounded-full border border-app-border focus:border-app-primary focus:outline-none transition-colors font-medium"
                     />
                     {lookupResult && (
                       <div
