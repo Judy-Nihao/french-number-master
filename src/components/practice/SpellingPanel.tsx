@@ -37,7 +37,7 @@ export const SpellingPanel = ({
         key={currentNumber}
         initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
-        className="text-8xl font-bold text-app-dark mb-8 drop-shadow-sm max-w-full wrap-anywhere text-center"
+        className="text-8xl font-bold text-app-dark mb-8  max-w-full wrap-anywhere text-center"
         style={{
           fontSize: `${Math.min(96, 480 / String(currentNumber ?? "").length)}px`,
         }}
@@ -61,7 +61,7 @@ export const SpellingPanel = ({
           />
           <div className="absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2">
             {feedback === "correct" && (
-              <CheckCircle2 className="text-app-primary" size={24} />
+              <CheckCircle2 className="text-app-success" size={24} />
             )}
             {feedback === "incorrect" && (
               <XCircle className="text-app-red" size={24} />

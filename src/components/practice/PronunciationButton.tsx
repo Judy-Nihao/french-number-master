@@ -9,9 +9,9 @@ type PronunciationButtonProps = ComponentPropsWithoutRef<"button"> & {
 
 const variants = {
   answer:
-    "p-4 border-surface hover:border-app-primary hover:text-app-primary transition-all shadow-elevation-control group",
+    "p-4 border-control hover:border-app-dark hover:text-app-dark transition-all  group",
   lookup:
-    "shrink-0 p-3 border-control hover:text-app-primary focus-visible:outline-2 focus-visible:outline-app-primary",
+    "shrink-0 p-3 border-control hover:text-app-dark focus-visible:outline-2 focus-visible:outline-app-dark",
 };
 
 export const PronunciationButton = ({
@@ -38,7 +38,7 @@ export const PronunciationButton = ({
           size={size}
           className={cn(
             "animate-spin",
-            variant === "answer" && "text-app-primary",
+            variant === "answer" && "text-app-dark",
           )}
         />
       ) : (
@@ -46,7 +46,7 @@ export const PronunciationButton = ({
           size={size}
           className={
             variant === "answer"
-              ? "text-app-dark group-hover:text-app-primary transition-colors"
+              ? "text-app-dark group-hover:text-app-dark transition-colors"
               : undefined
           }
         />

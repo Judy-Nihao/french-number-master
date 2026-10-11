@@ -28,7 +28,7 @@ export const LookupPanel = ({
     className="px-8 py-7"
   >
     <div className="flex items-center justify-center gap-2 mb-6">
-      <Search size={20} className="text-app-primary" />
+      <Search size={20} className="text-app-dark" />
       <h2 className="text-xl font-bold text-app-dark">Number → French</h2>
     </div>
     <NumberInput
@@ -46,7 +46,7 @@ export const LookupPanel = ({
               {lookupResult.word}
             </div>
             {lookupResult.ipa && (
-              <div className="text-sm text-app-dark/70 wrap-break-word">
+              <div className="text-sm text-app-dark/80 wrap-break-word">
                 {lookupResult.ipa}
               </div>
             )}

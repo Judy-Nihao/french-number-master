@@ -42,7 +42,7 @@ export const RangeSettings = ({
       className="grid grid-cols-1 sm:flex items-center gap-4 sm:gap-3"
     >
       <div className="flex items-center justify-center sm:justify-start gap-2 sm:shrink-0 sm:pl-2">
-        <Settings2 size={18} className="text-app-primary" />
+        <Settings2 size={18} className="text-app-dark/70" />
         <span className="text-xs font-bold text-app-dark/60 uppercase tracking-wider">
           Range
         </span>
@@ -74,7 +74,7 @@ export const RangeSettings = ({
         (minRange === Number(tempMin) && maxRange === Number(tempMax))
       }
       className={cn(
-        "text-[10px] text-app-primary mt-2 font-bold text-center h-4",
+        "text-[10px] text-app-dark/70 mt-2 font-bold text-center h-4",
         mode === "test" &&
           (minRange !== Number(tempMin) || maxRange !== Number(tempMax))
           ? "animate-bounce"
