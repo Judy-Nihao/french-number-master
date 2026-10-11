@@ -27,7 +27,7 @@ export const LookupPanel = ({
     tabIndex={0}
     className="px-8 py-7"
   >
-    <div className="flex items-center gap-2 mb-6">
+    <div className="flex items-center justify-center gap-2 mb-6">
       <Search size={20} className="text-app-primary" />
       <h2 className="text-xl font-bold text-app-dark">Number → French</h2>
     </div>
