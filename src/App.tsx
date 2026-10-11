@@ -280,14 +280,14 @@ export default function App() {
               mode === "lookup" && "grayscale opacity-60",
             )}
           >
-            <div className="bg-app-card p-4 rounded-4xl border-2 border-app-border grid grid-cols-1 sm:flex items-center gap-2 sm:gap-3">
-              <div className="flex items-center justify-center sm:justify-start gap-2 sm:shrink-0">
-                <Settings2 size={16} className="text-app-dark/60" />
-                <span className="text-xs font-medium text-app-dark/70">
+            <div className="bg-app-card p-4 sm:p-3 rounded-4xl sm:rounded-full border-2 border-app-border grid grid-cols-1 sm:flex items-center gap-4 sm:gap-3 shadow-sm">
+              <div className="flex items-center justify-center sm:justify-start gap-2 sm:shrink-0 sm:pl-2">
+                <Settings2 size={18} className="text-app-primary" />
+                <span className="text-xs font-bold text-app-dark/60 uppercase tracking-wider">
                   Range
                 </span>
               </div>
-              <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 min-w-0 sm:flex-1">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 sm:gap-2 min-w-0 sm:flex sm:flex-1 sm:justify-center">
                 <input
                   type="text"
                   inputMode="numeric"
@@ -295,9 +295,9 @@ export default function App() {
                   aria-label="Minimum practice number"
                   value={tempMin}
                   onChange={handleRangeInput(setTempMin)}
-                  className="w-full min-w-0 h-11 px-2 bg-app-primary-light/50 border border-transparent rounded-2xl text-center text-sm font-medium text-app-dark focus:outline-none focus:border-app-primary transition-colors disabled:cursor-not-allowed"
+                  className="w-full sm:w-20 sm:justify-self-center min-w-0 px-2 py-2 bg-app-primary-light border-2 border-transparent rounded-2xl text-center text-sm font-bold text-app-primary focus:outline-none focus:border-app-primary transition-colors disabled:cursor-not-allowed"
                 />
-                <span className="text-app-dark/60 text-xs">to</span>
+                <span className="text-app-dark/30 text-xs font-bold">to</span>
                 <input
                   type="text"
                   inputMode="numeric"
@@ -305,12 +305,12 @@ export default function App() {
                   aria-label="Maximum practice number"
                   value={tempMax}
                   onChange={handleRangeInput(setTempMax)}
-                  className="w-full min-w-0 h-11 px-2 bg-app-primary-light/50 border border-transparent rounded-2xl text-center text-sm font-medium text-app-dark focus:outline-none focus:border-app-primary transition-colors disabled:cursor-not-allowed"
+                  className="w-full sm:w-20 sm:justify-self-center min-w-0 px-2 py-2 bg-app-primary-light border-2 border-transparent rounded-2xl text-center text-sm font-bold text-app-primary focus:outline-none focus:border-app-primary transition-colors disabled:cursor-not-allowed"
                 />
               </div>
               <button
                 onClick={handleUpdateRange}
-                className="w-full sm:w-auto shrink-0 h-11 px-4 bg-transparent text-app-dark/80 border border-app-border rounded-2xl text-xs font-semibold hover:bg-app-primary-light hover:border-app-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-primary disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-app-border"
+                className="w-full sm:w-auto shrink-0 px-8 sm:px-5 py-3 sm:py-2.5 bg-app-dark text-white rounded-full text-xs font-bold hover:scale-105 active:scale-95 transition-transform shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-primary disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 Update
               </button>
