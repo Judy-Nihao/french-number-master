@@ -24,7 +24,7 @@ export const useNumberPractice = () => {
   const reducedMotion = useReducedMotion();
   const poolRef = useRef<number[]>([]);
   const lastNumberRef = useRef<number | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const generateRandomNumber = useCallback(() => {
     const rangeSize = maxRange - minRange + 1;
@@ -104,7 +104,7 @@ export const useNumberPractice = () => {
       }
     };
 
-  const handleAnswerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAnswerInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
     // 限制：只允許法文字母、空格、連字號及法文特有重音符號，防止中文輸入
     // 允許：a-z, A-Z, 0-9 (以防萬一), 空格, 連字號, 以及法文重音符號
@@ -181,7 +181,8 @@ export const useNumberPractice = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.nativeEvent.isComposing) {
+      e.preventDefault();
       if (feedback !== null) {
         generateRandomNumber();
       } else {

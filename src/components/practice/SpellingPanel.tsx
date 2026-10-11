@@ -1,9 +1,24 @@
-import { Input } from "../ui/Input";
+import { cn } from "../../lib/utils";
+import { AutoResizeTextarea } from "../ui/AutoResizeTextarea";
 import { AnimatedButton } from "../ui/Button";
 import { AnswerFeedback } from "./AnswerFeedback";
 import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 import type { PracticeController } from "../../hooks/useNumberPractice";
+
+// Static class names let Tailwind generate every supported number size.
+const numberSizeClasses: Record<number, string> = {
+  6: "text-[calc(480px/6)]",
+  7: "text-[calc(480px/7)]",
+  8: "text-[calc(480px/8)]",
+  9: "text-[calc(480px/9)]",
+  10: "text-[calc(480px/10)]",
+  11: "text-[calc(480px/11)]",
+  12: "text-[calc(480px/12)]",
+  13: "text-[calc(480px/13)]",
+  14: "text-[calc(480px/14)]",
+  15: "text-[calc(480px/15)]",
+};
 
 type SpellingPanelProps = Pick<
   PracticeController,
@@ -32,34 +47,33 @@ export const SpellingPanel = ({
   isPlaying,
 }: SpellingPanelProps) => (
   <div id="test-panel" role="tabpanel" aria-labelledby="test-tab" tabIndex={0}>
-    <div className="px-8 py-7 flex flex-col items-center relative z-10">
+    <div className="p-6 flex flex-col items-center relative z-10">
+      {/* The number key replays this Motion entrance for each new question. */}
       <motion.div
         key={currentNumber}
         initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
-        className="text-8xl font-bold text-app-dark mb-8  max-w-full wrap-anywhere text-center"
-        style={{
-          fontSize: `${Math.min(96, 480 / String(currentNumber ?? "").length)}px`,
-        }}
+        className={cn(
+          "font-bold text-app-dark mb-6 max-w-full wrap-anywhere text-center",
+          numberSizeClasses[String(currentNumber ?? "").length] ?? "text-8xl",
+        )}
       >
         {currentNumber}
       </motion.div>
 
       <div className="w-full space-y-4">
         <div className="relative group">
-          <Input
-            variant="answer"
+          <AutoResizeTextarea
             state={feedback ?? "default"}
             aria-label="French spelling"
             ref={inputRef}
-            type="text"
             value={userInput}
             onChange={handleAnswerInput}
             onKeyDown={handleKeyDown}
             placeholder="Type in French..."
             disabled={feedback !== null}
           />
-          <div className="absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2">
+          <div className="absolute right-5 top-5 pointer-events-none flex items-center gap-2">
             {feedback === "correct" && (
               <CheckCircle2 className="text-app-success" size={24} />
             )}
@@ -69,6 +83,7 @@ export const SpellingPanel = ({
           </div>
         </div>
 
+        {/* Motion keeps the outgoing button mounted until its exit finishes before showing the next action. */}
         <AnimatePresence mode="wait">
           {feedback === null ? (
             <AnimatedButton

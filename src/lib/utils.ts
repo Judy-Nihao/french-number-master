@@ -5,6 +5,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 const mergeClasses = extendTailwindMerge({
   extend: {
     classGroups: {
+      rounded: ["rounded-card", "rounded-field", "rounded-pill"],
       "border-w": ["border-control", "border-surface"],
       "border-w-t": ["border-t-surface"],
       shadow: [
