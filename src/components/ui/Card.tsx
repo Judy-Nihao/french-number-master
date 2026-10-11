@@ -10,7 +10,7 @@ type CardProps = ComponentPropsWithoutRef<"div"> & {
 const variants: Record<CardVariant, string> = {
   tool: "bg-app-shell rounded-card border-control border-app-border p-3 sm:p-6 shadow-elevation-control",
   exercise:
-    "min-h-84 shrink-0 bg-app-primary rounded-card shadow-elevation-subtle overflow-hidden relative",
+    "min-h-[302px] shrink-0 bg-app-primary rounded-card shadow-elevation-subtle overflow-hidden relative",
   range:
     "p-4 sm:p-3 rounded-card sm:rounded-pill border-control border-app-border",
   lookupResult: "bg-transparent rounded-none pt-6 border-t border-app-dark/20",
