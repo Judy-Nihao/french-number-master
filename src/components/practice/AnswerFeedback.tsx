@@ -32,7 +32,7 @@ export const AnswerFeedback = ({
         opacity: { duration: reducedMotion ? 0 : 0.2 },
       }}
       className={cn(
-        "flex flex-col gap-3 border-t px-6 py-6 sm:px-7 sm:py-7",
+        "flex flex-col gap-3 border-t px-6 py-6 md:px-7 md:py-7",
         feedback === "incorrect"
           ? "border-app-red/40 bg-app-error-light"
           : "border-app-border bg-app-answer",
@@ -49,7 +49,7 @@ export const AnswerFeedback = ({
         </div>
         <div
           className={cn(
-            "text-xl sm:text-2xl font-bold wrap-anywhere",
+            "text-xl md:text-2xl font-bold wrap-anywhere",
             feedback === "incorrect" ? "text-app-red" : "text-app-dark",
           )}
         >

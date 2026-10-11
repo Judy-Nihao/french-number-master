@@ -39,9 +39,9 @@ export const RangeSettings = ({
   >
     <Card
       variant="range"
-      className="grid grid-cols-1 sm:flex items-center gap-4 sm:gap-3"
+      className="grid grid-cols-1 md:flex items-center gap-4 md:gap-3"
     >
-      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 sm:gap-2 min-w-0 sm:flex sm:flex-1 sm:justify-center">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 md:gap-2 min-w-0 md:flex md:flex-1 md:justify-center">
         <NumberInput
           onCompositionUpdate={handleCompositionUpdate}
           onBlur={dismissKeyboardHint}
@@ -49,7 +49,7 @@ export const RangeSettings = ({
           aria-label="Minimum practice number"
           value={tempMin}
           onChange={handleRangeInput(setTempMin)}
-          className="sm:w-20 sm:justify-self-center"
+          className="md:w-20 md:justify-self-center"
         />
         <span className="text-app-dark/30 text-xs font-bold">to</span>
         <NumberInput
@@ -59,7 +59,7 @@ export const RangeSettings = ({
           aria-label="Maximum practice number"
           value={tempMax}
           onChange={handleRangeInput(setTempMax)}
-          className="sm:w-20 sm:justify-self-center"
+          className="md:w-20 md:justify-self-center"
         />
       </div>
       <Button

@@ -25,10 +25,10 @@ const App = () => {
               practice.maxRange !== Number(practice.tempMax)))
         }
       />
-      <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 overflow-x-clip">
-        <div className="w-full max-w-lg flex flex-col relative">
+      <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 md:py-12 md:px-6 overflow-x-clip">
+        <div className="w-full max-w-lg flex flex-col gap-4 relative">
           {/* Header */}
-          <header className="mb-4 text-center">
+          <header className="text-center">
             <h1 className="font-display text-3xl md:text-5xl font-medium italic text-app-dark">
               French Number Master
             </h1>
