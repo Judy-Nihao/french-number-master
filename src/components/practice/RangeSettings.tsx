@@ -8,8 +8,6 @@ import type { PracticeController } from "../../hooks/useNumberPractice";
 type RangeSettingsProps = Pick<
   PracticeController,
   | "mode"
-  | "minRange"
-  | "maxRange"
   | "tempMin"
   | "tempMax"
   | "setTempMin"
@@ -20,8 +18,6 @@ type RangeSettingsProps = Pick<
 
 export const RangeSettings = ({
   mode,
-  minRange,
-  maxRange,
   tempMin,
   tempMax,
   setTempMin,
@@ -33,7 +29,7 @@ export const RangeSettings = ({
     disabled={mode === "lookup"}
     aria-label="Practice range"
     className={cn(
-      "min-w-0 border-0 p-0 transition-opacity",
+      "min-w-0 mb-6 border-0 p-0 transition-opacity",
       mode === "lookup" && "grayscale opacity-60",
     )}
   >
@@ -41,12 +37,6 @@ export const RangeSettings = ({
       variant="range"
       className="grid grid-cols-1 sm:flex items-center gap-4 sm:gap-3"
     >
-      <div className="flex items-center justify-center sm:justify-start gap-2 sm:shrink-0 sm:pl-2">
-        <Settings2 size={18} className="text-app-dark/70" />
-        <span className="text-xs font-bold text-app-dark/60 uppercase tracking-wider">
-          Range
-        </span>
-      </div>
       <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 sm:gap-2 min-w-0 sm:flex sm:flex-1 sm:justify-center">
         <NumberInput
           variant="range"
@@ -64,24 +54,14 @@ export const RangeSettings = ({
           className="sm:w-20 sm:justify-self-center"
         />
       </div>
-      <Button variant="update" onClick={handleUpdateRange}>
-        Update
+      <Button
+        variant="update"
+        onClick={handleUpdateRange}
+        className="flex items-center justify-center gap-2"
+      >
+        <Settings2 size={16} aria-hidden="true" />
+        Update Range
       </Button>
     </Card>
-    <p
-      aria-hidden={
-        mode === "lookup" ||
-        (minRange === Number(tempMin) && maxRange === Number(tempMax))
-      }
-      className={cn(
-        "text-[10px] text-app-dark/70 mt-2 font-bold text-center h-4",
-        mode === "test" &&
-          (minRange !== Number(tempMin) || maxRange !== Number(tempMax))
-          ? "animate-bounce"
-          : "invisible",
-      )}
-    >
-      Don't forget to update!
-    </p>
   </fieldset>
 );

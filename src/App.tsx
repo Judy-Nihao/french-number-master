@@ -1,3 +1,4 @@
+import { RangeUpdateAlert } from "./components/practice/RangeUpdateAlert";
 import { Card } from "./components/ui/Card";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
 import { ModeTabs } from "./components/ModeTabs";
@@ -11,6 +12,13 @@ const App = () => {
   const { mode, setMode, reducedMotion } = practice;
   return (
     <MotionConfig reducedMotion="user">
+      <RangeUpdateAlert
+        visible={
+          mode === "test" &&
+          (practice.minRange !== Number(practice.tempMin) ||
+            practice.maxRange !== Number(practice.tempMax))
+        }
+      />
       <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 overflow-x-clip">
         <div className="w-full max-w-lg flex flex-col relative">
           {/* Header */}
@@ -33,6 +41,7 @@ const App = () => {
               }
             >
               <AnimatePresence mode="wait" initial={false}>
+                {/* Motion coordinates directional enter/exit with AnimatePresence and reduced-motion preferences. */}
                 <motion.div
                   key={mode}
                   initial={{
