@@ -258,7 +258,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 pb-20 sm:pb-12 overflow-x-hidden">
+    <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 overflow-x-hidden">
       <div className="w-full max-w-md flex flex-col relative">
         {/* Organic Background Shape - Top Left */}
         <div className="absolute -top-20 -left-20 w-64 h-64 bg-app-primary/10 rounded-full blur-3xl -z-10" />
@@ -449,21 +449,22 @@ export default function App() {
           </AnimatePresence>
         </div>
 
-      </div>
-
-      {/* Bottom Tab Bar */}
+      {/* Independent Number Lookup */}
+      <div className="mt-6 flex justify-center">
       <button
         onClick={() => {
           setLookupValue("");
           setLookupResult(null);
           setIsLookupOpen(true);
         }}
-        aria-label="Direct lookup"
-        className="fixed bottom-0 left-0 right-0 z-40 bg-app-dark text-white flex items-center justify-center gap-2 py-4 rounded-t-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.12)] active:opacity-80 transition-opacity"
+        aria-haspopup="dialog"
+        className="bg-app-dark text-white flex items-center justify-center gap-2 px-6 py-3.5 rounded-full shadow-md hover:bg-app-dark/85 active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-app-primary"
       >
         <Search size={16} />
-        <span className="text-sm font-bold tracking-wider">Number → French</span>
+        <span className="text-sm font-bold">Look up a number</span>
       </button>
+      </div>
+      </div>
 
       {/* Lookup Drawer / Dialog */}
       <AnimatePresence>
