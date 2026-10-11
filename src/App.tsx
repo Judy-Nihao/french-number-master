@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Loader2,
   Search,
-  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
@@ -30,8 +29,7 @@ export default function App() {
     word: string;
     ipa: string;
   } | null>(null);
-  const [isLookupOpen, setIsLookupOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [mode, setMode] = useState<"test" | "lookup">("test");
   const poolRef = useRef<number[]>([]);
   const lastNumberRef = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -84,14 +82,6 @@ export default function App() {
     generateRandomNumber();
   }, [generateRandomNumber]);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 640px)");
-    setIsDesktop(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
   const handleLookup = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     if (val === "" || /^\d+$/.test(val)) {
@@ -110,7 +100,7 @@ export default function App() {
   };
 
   const playLookupAudio = () => {
-    if (!lookupResult || isPlaying) return;
+    if (!lookupResult?.ipa || isPlaying) return;
     setIsPlaying(true);
     window.speechSynthesis.cancel();
     setTimeout(() => {
@@ -182,7 +172,7 @@ export default function App() {
   };
 
   const handleCheck = () => {
-    if (currentNumber === null) return;
+    if (currentNumber === null || !userInput.trim()) return;
     const representation = getFrenchRepresentation(currentNumber);
     const correctWord = representation.word.toLowerCase();
     const input = userInput.trim().toLowerCase();
@@ -273,7 +263,7 @@ export default function App() {
         </header>
 
         {/* Range Settings - Clean Pill Card */}
-        <div className="mb-6">
+        {mode === "test" && <div className="mb-6">
           <div className="bg-app-card p-4 sm:p-3 rounded-4xl border-2 border-app-border flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-3 shadow-sm">
             <div className="flex items-center gap-2 pl-2">
               <Settings2 size={18} className="text-app-primary" />
@@ -286,6 +276,7 @@ export default function App() {
                 type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
+                aria-label="Minimum practice number"
                 value={tempMin}
                 onChange={handleRangeInput(setTempMin)}
                 className="w-24 sm:w-20 px-2 py-2 bg-app-primary-light border-2 border-transparent rounded-2xl text-center text-sm font-bold text-app-primary focus:outline-none focus:border-app-primary transition-all"
@@ -295,6 +286,7 @@ export default function App() {
                 type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
+                aria-label="Maximum practice number"
                 value={tempMax}
                 onChange={handleRangeInput(setTempMax)}
                 className="w-24 sm:w-20 px-2 py-2 bg-app-primary-light border-2 border-transparent rounded-2xl text-center text-sm font-bold text-app-primary focus:outline-none focus:border-app-primary transition-all"
@@ -312,10 +304,12 @@ export default function App() {
               Don't forget to update!
             </p>
           )}
-        </div>
+        </div>}
 
         {/* Main Exercise Card */}
         <div className="bg-app-card rounded-[3rem] border-2 border-app-border shadow-xl shadow-app-primary/5 overflow-hidden relative">
+          {mode === "test" ? (
+          <div id="test-panel" role="tabpanel" aria-labelledby="test-tab" tabIndex={0}>
           <div className="px-8 py-7 flex flex-col items-center relative z-10">
             <motion.div
               key={currentNumber}
@@ -329,6 +323,7 @@ export default function App() {
             <div className="w-full space-y-4">
               <div className="relative group">
                 <input
+                  aria-label="French spelling"
                   ref={inputRef}
                   type="text"
                   value={userInput}
@@ -426,6 +421,7 @@ export default function App() {
 
                   <div className="flex gap-4">
                     <button
+                      aria-label="Play answer pronunciation"
                       onClick={playAudio}
                       disabled={isPlaying}
                       className="p-4 rounded-full bg-app-card border-2 border-app-border hover:border-app-primary hover:text-app-primary transition-all shadow-md group disabled:opacity-50"
@@ -447,122 +443,49 @@ export default function App() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-
-      {/* Independent Number Lookup */}
-      <div className="mt-6 flex justify-center">
-      <button
-        onClick={() => {
-          setLookupValue("");
-          setLookupResult(null);
-          setIsLookupOpen(true);
-        }}
-        aria-haspopup="dialog"
-        className="bg-app-dark text-white flex items-center justify-center gap-2 px-6 py-3.5 rounded-full shadow-md hover:bg-app-dark/85 active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-app-primary"
-      >
-        <Search size={16} />
-        <span className="text-sm font-bold">Look up a number</span>
-      </button>
-      </div>
-      </div>
-
-      {/* Lookup Drawer / Dialog */}
-      <AnimatePresence>
-        {isLookupOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsLookupOpen(false)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
-            />
-            <motion.div
-              initial={isDesktop ? { opacity: 0, scale: 0.95 } : { y: "100%" }}
-              animate={isDesktop ? { opacity: 1, scale: 1 } : { y: 0 }}
-              exit={isDesktop ? { opacity: 0, scale: 0.95 } : { y: "100%" }}
-              transition={{ type: "spring", damping: 28, stiffness: 320 }}
-              className={cn(
-                "fixed z-50 bg-app-card w-full p-6 shadow-2xl",
-                isDesktop
-                  ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-md rounded-3xl"
-                  : "bottom-0 left-0 right-0 rounded-t-3xl pb-10 min-h-[30vh]",
-              )}
-            >
-              {/* Panel Header */}
-              <div className="flex items-center justify-between mb-5">
-                <div className="flex items-center gap-2">
-                  <Search size={18} className="text-app-primary" />
-                  <h2 className="text-lg font-bold text-app-dark">
-                    Number → French
-                  </h2>
+          </div>
+          ) : (
+            <div id="lookup-panel" role="tabpanel" aria-labelledby="lookup-tab" tabIndex={0} className="px-8 py-7 min-h-72">
+              <div className="flex items-center gap-2 mb-6">
+                <Search size={20} className="text-app-primary" />
+                <h2 className="text-xl font-bold text-app-dark">Number → French</h2>
+              </div>
+              <label htmlFor="lookup-number" className="block text-sm font-medium text-app-dark mb-3">Enter a number</label>
+              <input id="lookup-number" type="text" inputMode="numeric" pattern="[0-9]*" value={lookupValue} onChange={handleLookup} placeholder="Enter any number..." className="w-full px-5 py-4 rounded-full border-4 border-app-border focus:border-app-primary focus:outline-none transition-colors font-medium" />
+              {lookupResult && (
+                <div className="mt-6 bg-app-primary-light/30 rounded-2xl p-4 border border-app-primary/10" aria-live="polite">
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xl font-bold text-app-dark mb-2 wrap-break-word">{lookupResult.word}</div>
+                      {lookupResult.ipa && <div className="text-sm text-app-dark/70 wrap-break-word">{lookupResult.ipa}</div>}
+                    </div>
+                    {lookupResult.ipa && <button onClick={playLookupAudio} disabled={isPlaying} aria-label="Play lookup pronunciation" className="shrink-0 p-3 rounded-full bg-white border border-app-border hover:text-app-primary disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-app-primary">
+                      {isPlaying ? <Loader2 size={20} className="animate-spin" /> : <Volume2 size={20} />}
+                    </button>}
+                  </div>
                 </div>
-                <button
-                  onClick={() => setIsLookupOpen(false)}
-                  className="p-2 rounded-full hover:bg-app-border transition-colors"
-                >
-                  <X size={18} className="text-app-dark/50" />
-                </button>
-              </div>
-
-              {/* Lookup Input */}
-              <div className="space-y-4">
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  value={lookupValue}
-                  onChange={handleLookup}
-                  placeholder="Enter any number..."
-                  autoFocus
-                  className="w-full px-4 py-3 rounded-xl border-2 border-app-border focus:border-app-primary focus:outline-none transition-all font-medium"
-                />
-
-                <AnimatePresence>
-                  {lookupResult && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="bg-app-primary-light/30 rounded-xl p-4 border border-app-primary/10">
-                        <div className="flex justify-between items-start gap-2">
-                          <div className="flex-1">
-                            <div className="text-xl font-bold text-app-dark mb-1 wrap-break-word">
-                              {lookupResult.word}
-                            </div>
-                            <div className="text-xs font-medium text-app-dark/50 italic">
-                              {lookupResult.ipa}
-                            </div>
-                          </div>
-                          <button
-                            onClick={playLookupAudio}
-                            disabled={isPlaying}
-                            className="p-3 rounded-full bg-white shadow-sm hover:text-app-primary transition-all disabled:opacity-50"
-                          >
-                            {isPlaying ? (
-                              <Loader2
-                                size={18}
-                                className="text-app-primary animate-spin"
-                              />
-                            ) : (
-                              <Volume2
-                                size={18}
-                                className="text-app-dark hover:text-app-primary"
-                              />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              )}
+            </div>
+          )}
+        </div>
+        <div role="tablist" aria-label="Number practice mode" className="mt-6 grid grid-cols-2 rounded-full border-2 border-app-border bg-app-card p-1 gap-1">
+          {(["test", "lookup"] as const).map((tabMode) => (
+            <button key={tabMode} id={tabMode + "-tab"} role="tab" aria-selected={mode === tabMode} aria-controls={tabMode + "-panel"} tabIndex={mode === tabMode ? 0 : -1}
+              onClick={() => setMode(tabMode)}
+              onKeyDown={(event) => {
+                if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+                  event.preventDefault();
+                  const next = event.key === "Home" ? "test" : event.key === "End" ? "lookup" : mode === "test" ? "lookup" : "test";
+                  setMode(next);
+                  document.getElementById(next + "-tab")?.focus();
+                }
+              }}
+              className={cn("min-h-12 px-3 py-3 rounded-full text-xs sm:text-sm font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-primary", mode === tabMode ? "bg-app-primary text-white" : "text-app-dark/70 hover:bg-app-primary-light")}>
+              {tabMode === "test" ? "Number Spelling Test" : "Number Lookup"}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
