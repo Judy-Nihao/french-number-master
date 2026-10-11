@@ -49,7 +49,7 @@ export const ModeTabs = ({
       ref={trackRef}
       role="tablist"
       aria-label="Number practice mode"
-      className="relative mt-6 grid grid-cols-2 rounded-pill border-control border-app-border bg-app-card p-1 select-none touch-pan-y"
+      className="relative grid grid-cols-2 rounded-pill border-control border-app-border bg-app-card p-1 select-none touch-pan-y"
       onPanStart={() => {
         dragStart.current = x.get();
       }}
@@ -111,7 +111,7 @@ export const ModeTabs = ({
               : "text-app-dark/70 hover:text-app-dark",
           )}
         >
-          {tabMode === "test" ? "Number Spelling Test" : "Number Lookup"}
+          {tabMode === "test" ? "Spelling" : "Lookup"}
         </button>
       ))}
     </motion.div>
