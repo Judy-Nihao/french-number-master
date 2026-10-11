@@ -11,16 +11,16 @@ export type InputProps = ComponentPropsWithRef<"input"> & {
 
 const variants: Record<InputVariant, string> = {
   answer:
-    "px-6 py-4 rounded-pill border-control transition-all duration-300 text-lg font-medium placeholder:text-app-dark/20",
+    "px-6 py-4 rounded-pill border-control transition-all duration-300 text-lg font-medium placeholder:text-app-dark/60",
   lookup: "px-5 py-4 rounded-pill border-control transition-colors font-medium",
   range:
-    "min-w-0 px-2 py-2 rounded-field border-surface bg-app-primary-light text-center text-sm font-bold text-app-primary transition-colors disabled:cursor-not-allowed",
+    "min-w-0 px-2 py-2 rounded-field border-surface bg-app-bg text-center text-sm font-bold text-app-dark transition-colors disabled:cursor-not-allowed",
 };
 
 const states: Record<InputState, string> = {
-  default: "border-app-border focus:border-app-primary bg-transparent",
-  correct: "border-app-primary bg-app-primary-light text-app-primary",
-  incorrect: "border-app-red bg-app-red/5 text-app-red",
+  default: "border-app-dark/15 focus:border-app-dark bg-app-card",
+  correct: "border-app-success bg-app-primary-light text-app-success",
+  incorrect: "border-surface border-app-red bg-app-error-light text-app-red",
 };
 
 export const Input = ({
@@ -36,7 +36,7 @@ export const Input = ({
       "w-full focus:outline-none",
       variants[variant],
       variant === "range"
-        ? "border-transparent focus:border-app-primary"
+        ? "border-transparent focus:border-app-dark"
         : states[state],
       className,
     )}

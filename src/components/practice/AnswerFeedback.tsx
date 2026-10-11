@@ -23,8 +23,10 @@ export const AnswerFeedback = ({
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: 20, opacity: 0 }}
       className={cn(
-        "border-t-surface border-app-border p-6",
-        feedback === "correct" ? "bg-app-primary-light" : "bg-app-red/5",
+        "border-t p-6",
+        feedback === "incorrect"
+          ? "border-app-red/40 bg-app-error-light"
+          : "border-app-border bg-app-answer",
       )}
     >
       <div className="flex flex-col items-center gap-4">
@@ -33,15 +35,20 @@ export const AnswerFeedback = ({
             <div
               className={cn(
                 "text-[10px] uppercase tracking-[0.2em] font-bold mb-1",
-                feedback === "correct" ? "text-app-primary" : "text-app-red",
+                feedback === "correct" ? "text-app-success" : "text-app-red",
               )}
             >
               {feedback === "correct" ? "Perfect!" : "Correct Answer"}
             </div>
-            <div className="text-2xl font-bold text-app-dark mb-1 wrap-break-word">
+            <div
+              className={cn(
+                "text-2xl font-bold mb-1 wrap-break-word",
+                feedback === "incorrect" ? "text-app-red" : "text-app-dark",
+              )}
+            >
               {representation.word}
             </div>
-            <div className="text-sm font-medium text-app-dark/40 bg-app-card px-3 py-1 rounded-pill border-control border-app-border inline-block">
+            <div className="text-sm font-medium text-app-dark/75 bg-app-card px-3 py-1 rounded-pill border-control border-app-border inline-block">
               {representation.ipa}
             </div>
           </div>

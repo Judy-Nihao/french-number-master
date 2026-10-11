@@ -12,12 +12,7 @@ const App = () => {
   return (
     <MotionConfig reducedMotion="user">
       <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 sm:py-12 sm:px-6 overflow-x-clip">
-        <div className="w-full max-w-md flex flex-col relative">
-          {/* Organic Background Shape - Top Left */}
-          <div className="absolute -top-20 -left-20 w-64 h-64 bg-app-primary/10 rounded-full blur-3xl -z-10" />
-          {/* Organic Background Shape - Bottom Right */}
-          <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-app-accent/10 rounded-full blur-3xl -z-10" />
-
+        <div className="w-full max-w-lg flex flex-col relative">
           {/* Header */}
           <header className="mb-6 text-center">
             <h1 className="font-display text-4xl font-semibold  text-app-dark">
@@ -25,37 +20,45 @@ const App = () => {
             </h1>
           </header>
 
-          {/* Range settings */}
-          <RangeSettings {...practice} />
+          <Card variant="tool">
+            {/* Range settings */}
+            <RangeSettings {...practice} />
 
-          {/* Main Exercise Card */}
-          <Card>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={mode}
-                initial={{
-                  opacity: 0,
-                  x: reducedMotion ? 0 : mode === "lookup" ? 18 : -18,
-                }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{
-                  opacity: 0,
-                  x: reducedMotion ? 0 : mode === "test" ? -18 : 18,
-                }}
-                transition={{
-                  duration: reducedMotion ? 0.08 : 0.16,
-                  ease: "easeOut",
-                }}
-              >
-                {mode === "test" ? (
-                  <SpellingPanel {...practice} />
-                ) : (
-                  <LookupPanel {...practice} />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            {/* Main Exercise Card */}
+            <Card
+              state={
+                mode === "test" && practice.feedback === "incorrect"
+                  ? "incorrect"
+                  : "default"
+              }
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={mode}
+                  initial={{
+                    opacity: 0,
+                    x: reducedMotion ? 0 : mode === "lookup" ? 18 : -18,
+                  }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{
+                    opacity: 0,
+                    x: reducedMotion ? 0 : mode === "test" ? -18 : 18,
+                  }}
+                  transition={{
+                    duration: reducedMotion ? 0.08 : 0.16,
+                    ease: "easeOut",
+                  }}
+                >
+                  {mode === "test" ? (
+                    <SpellingPanel {...practice} />
+                  ) : (
+                    <LookupPanel {...practice} />
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </Card>
+            <ModeTabs mode={mode} onChange={setMode} />
           </Card>
-          <ModeTabs mode={mode} onChange={setMode} />
         </div>
       </div>
     </MotionConfig>
