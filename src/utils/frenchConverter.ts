@@ -1,10 +1,11 @@
+import type { FrenchRepresentation } from "../types";
 import { BASE_FRENCH_NUMBERS } from '../constants/frenchNumbers';
 
 /**
  * Converts a number to its French word representation (0-999,999,999,999,999).
  * Includes IPA phonetic notation (best effort for large numbers).
  */
-export const getFrenchRepresentation = (n: number, isFinal: boolean = true): { word: string; ipa: string } => {
+export const getFrenchRepresentation = (n: number, isFinal: boolean = true): FrenchRepresentation => {
   // Handle basic cases 0-100
   if (n <= 100) {
     const result = { ...BASE_FRENCH_NUMBERS[n] };

@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Personal notes and local design workflow (only README is shared)
+*.md
+*.MD
+!/README.md
+/docs/
+/.impeccable/
