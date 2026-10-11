@@ -7,15 +7,15 @@ import {
 } from "motion/react";
 import { cn } from "../lib/utils";
 
-export type PracticeMode = "test" | "lookup";
+import type { PracticeMode } from "../types";
 
-export function ModeTabs({
+export const ModeTabs = ({
   mode,
   onChange,
 }: {
   mode: PracticeMode;
   onChange: (mode: PracticeMode) => void;
-}) {
+}) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragStart = useRef(0);
   const ignoreClickUntil = useRef(0);
@@ -49,7 +49,7 @@ export function ModeTabs({
       ref={trackRef}
       role="tablist"
       aria-label="Number practice mode"
-      className="relative mt-6 grid grid-cols-2 rounded-full border-2 border-app-border bg-app-card p-1 select-none"
+      className="relative mt-6 grid grid-cols-2 rounded-pill border-surface border-app-border bg-app-card p-1 select-none"
       style={{ touchAction: "pan-y" }}
       onPanStart={() => {
         dragStart.current = x.get();
@@ -75,7 +75,7 @@ export function ModeTabs({
     >
       <motion.div
         aria-hidden="true"
-        className="absolute left-1 top-1 bottom-1 rounded-full bg-app-primary pointer-events-none"
+        className="absolute left-1 top-1 bottom-1 rounded-pill bg-app-primary pointer-events-none"
         style={{ x, width: "calc((100% - 8px) / 2)" }}
       />
       {(["test", "lookup"] as const).map((tabMode) => (
@@ -105,7 +105,7 @@ export function ModeTabs({
             document.getElementById(`${next}-tab`)?.focus();
           }}
           className={cn(
-            "relative z-10 min-h-12 px-2 py-3 rounded-full text-xs sm:text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-primary",
+            "relative z-10 min-h-12 px-2 py-3 rounded-pill text-xs sm:text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-primary",
             mode === tabMode
               ? "text-white"
               : "text-app-dark/70 hover:text-app-dark",
@@ -116,4 +116,4 @@ export function ModeTabs({
       ))}
     </motion.div>
   );
-}
+};
