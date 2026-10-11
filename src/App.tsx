@@ -20,7 +20,7 @@ const App = () => {
 
           {/* Header */}
           <header className="mb-6 text-center">
-            <h1 className="text-3xl font-bold text-app-dark tracking-tight">
+            <h1 className="font-display text-4xl font-semibold  text-app-dark">
               French Number Master
             </h1>
           </header>
