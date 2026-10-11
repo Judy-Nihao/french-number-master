@@ -24,6 +24,7 @@
   --color-app-dark: #07100b;
   --color-app-text: var(--color-app-dark);
   --color-app-border: #d7ddd2;
+  --color-app-input-border: #92998f;
   --color-app-shell: #ffffff;
   --color-app-answer: #eef1e9;
   --color-app-card: #fafbf7;
