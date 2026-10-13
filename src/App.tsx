@@ -1,4 +1,6 @@
 import { FloatingNotice } from "./components/practice/FloatingNotice";
+import { ArrowRight } from "lucide-react";
+import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
 import { ModeTabs } from "./components/ModeTabs";
@@ -72,6 +74,22 @@ const App = () => {
                 </motion.div>
               </AnimatePresence>
             </Card>
+            {mode === "test" && practice.feedback !== null && (
+              <div className="flex justify-end">
+                <Button
+                  variant="next"
+                  onClick={practice.generateRandomNumber}
+                  aria-label="Next question"
+                >
+                  Next
+                  <ArrowRight
+                    size={16}
+                    aria-hidden="true"
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
+                </Button>
+              </div>
+            )}
             <ModeTabs mode={mode} onChange={setMode} />
           </Card>
         </div>

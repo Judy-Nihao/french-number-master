@@ -29,7 +29,6 @@ type SpellingPanelProps = Pick<
   | "handleKeyDown"
   | "feedback"
   | "handleCheck"
-  | "generateRandomNumber"
   | "playAudio"
   | "handleCompositionUpdate"
   | "dismissKeyboardHint"
@@ -44,7 +43,6 @@ export const SpellingPanel = ({
   handleKeyDown,
   feedback,
   handleCheck,
-  generateRandomNumber,
   playAudio,
   isPlaying,
   handleCompositionUpdate,
@@ -101,7 +99,6 @@ export const SpellingPanel = ({
         feedback={feedback}
         isPlaying={isPlaying}
         playAudio={playAudio}
-        onNext={generateRandomNumber}
       />
     )}
   </AnimatedHeight>
