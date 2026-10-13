@@ -66,7 +66,6 @@ export const LookupPanel = ({
           </div>
           {lookupResult.ipa && (
             <PronunciationButton
-              variant="lookup"
               onClick={playLookupAudio}
               isPlaying={isPlaying}
               aria-label="Play lookup pronunciation"

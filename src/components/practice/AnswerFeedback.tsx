@@ -57,12 +57,10 @@ export const AnswerFeedback = ({
       </div>
       <div className="flex justify-center">
         <PronunciationButton
-          variant="lookup"
           aria-label="Play answer pronunciation"
           title="Play pronunciation"
           onClick={playAudio}
           isPlaying={isPlaying}
-          className="cursor-pointer flex h-11 w-11 shrink-0 items-center justify-center p-0"
         />
       </div>
     </motion.div>
