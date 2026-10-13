@@ -29,21 +29,28 @@ export const LookupPanel = ({
     role="tabpanel"
     aria-labelledby="lookup-tab"
     tabIndex={0}
-    className="flex flex-col gap-6 px-8 py-7"
+    className="flex flex-col gap-6 p-8 py-10"
   >
-    <div className="flex items-center justify-center gap-2">
-      <Search size={20} className="text-app-dark" />
-      <h2 className="text-xl font-bold text-app-dark">Number → French</h2>
+    <h2 className="text-center text-xl font-bold text-app-dark">
+      Number → French
+    </h2>
+    <div className="relative">
+      <NumberInput
+        onCompositionUpdate={handleCompositionUpdate}
+        onBlur={dismissKeyboardHint}
+        id="lookup-number"
+        aria-label="Enter a number"
+        value={lookupValue}
+        onChange={handleLookup}
+        placeholder="Enter any number..."
+        className="pr-12"
+      />
+      <Search
+        size={20}
+        aria-hidden="true"
+        className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-app-dark/35"
+      />
     </div>
-    <NumberInput
-      onCompositionUpdate={handleCompositionUpdate}
-      onBlur={dismissKeyboardHint}
-      id="lookup-number"
-      aria-label="Enter a number"
-      value={lookupValue}
-      onChange={handleLookup}
-      placeholder="Enter any number..."
-    />
     {lookupResult && (
       <Card variant="lookupResult" aria-live="polite">
         <div className="flex justify-between items-center gap-3">

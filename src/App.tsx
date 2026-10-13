@@ -27,7 +27,7 @@ const App = () => {
               practice.maxRange !== Number(practice.tempMax)))
         }
       />
-      <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center py-6 px-4 md:py-12 md:px-6 overflow-x-clip">
+      <div className="min-h-screen bg-app-bg flex flex-col items-center py-6 px-4 md:py-12 md:px-6 overflow-x-clip">
         <div className="w-full max-w-lg flex flex-col gap-4 relative">
           {/* Header */}
           <header className="text-center">
@@ -75,11 +75,12 @@ const App = () => {
               </AnimatePresence>
             </Card>
             {mode === "test" && practice.feedback !== null && (
-              <div className="flex justify-end">
+              <div className="flex justify-center">
                 <Button
                   variant="next"
                   onClick={practice.generateRandomNumber}
                   aria-label="Next question"
+                  className="cursor-pointer"
                 >
                   Next
                   <ArrowRight

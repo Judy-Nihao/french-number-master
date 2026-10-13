@@ -54,7 +54,7 @@ export const SpellingPanel = ({
     aria-labelledby="test-tab"
     tabIndex={0}
   >
-    <div className="p-6 flex flex-col gap-6 items-center relative z-10">
+    <div className="p-6 pt-8 flex flex-col gap-4 items-center relative z-10">
       {/* The number key replays this Motion entrance for each new question. */}
       <motion.div
         key={currentNumber}
