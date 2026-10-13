@@ -178,11 +178,7 @@ export const useNumberPractice = () => {
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ["primary", "primary-light", "accent"].map((color) =>
-          getComputedStyle(document.documentElement)
-            .getPropertyValue(`--color-app-${color}`)
-            .trim(),
-        ),
+        // Use the library's vivid multicolor palette for celebration, independently of the UI theme.
         disableForReducedMotion: true,
       });
     } else {
