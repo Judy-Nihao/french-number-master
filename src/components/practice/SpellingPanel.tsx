@@ -6,18 +6,21 @@ import { AnswerFeedback } from "./AnswerFeedback";
 import { motion } from "motion/react";
 import type { PracticeController } from "../../hooks/useNumberPractice";
 
-// Static class names let Tailwind generate every supported number size.
+// Static classes combine digit-based caps with the available number-row width.
 const numberSizeClasses: Record<number, string> = {
-  6: "text-[calc(480px/6)]",
-  7: "text-[calc(480px/7)]",
-  8: "text-[calc(480px/8)]",
-  9: "text-[calc(480px/9)]",
-  10: "text-[calc(480px/10)]",
-  11: "text-[calc(480px/11)]",
-  12: "text-[calc(480px/12)]",
-  13: "text-[calc(480px/13)]",
-  14: "text-[calc(480px/14)]",
-  15: "text-[calc(480px/15)]",
+  3: "text-[clamp(1rem,calc(100cqi/2.1),5.5rem)]",
+  4: "text-[clamp(1rem,calc(100cqi/2.8),4.5rem)]",
+  5: "text-[clamp(1rem,calc(100cqi/3.5),3.75rem)]",
+  6: "text-[clamp(1rem,calc(100cqi/4.2),3.5rem)]",
+  7: "text-[clamp(1rem,calc(100cqi/4.9),3rem)]",
+  8: "text-[clamp(1rem,calc(100cqi/5.6),2.75rem)]",
+  9: "text-[clamp(1rem,calc(100cqi/6.3),2.5rem)]",
+  10: "text-[clamp(1rem,calc(100cqi/7),2.25rem)]",
+  11: "text-[clamp(1rem,calc(100cqi/7.7),2rem)]",
+  12: "text-[clamp(1rem,calc(100cqi/8.4),1.875rem)]",
+  13: "text-[clamp(1rem,calc(100cqi/9.1),1.75rem)]",
+  14: "text-[clamp(1rem,calc(100cqi/9.8),1.625rem)]",
+  15: "text-[clamp(1rem,calc(100cqi/10.5),1.5rem)]",
 };
 
 type SpellingPanelProps = Pick<
@@ -55,18 +58,20 @@ export const SpellingPanel = ({
     tabIndex={0}
   >
     <div className="p-6 pt-8 flex flex-col gap-4 items-center relative z-10">
-      {/* The number key replays this Motion entrance for each new question. */}
-      <motion.div
-        key={currentNumber}
-        initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
-        animate={{ scale: 1, opacity: 1, rotate: 0 }}
-        className={cn(
-          "font-display font-semibold not-italic text-app-dark max-w-full wrap-anywhere text-center",
-          numberSizeClasses[String(currentNumber ?? "").length] ?? "text-8xl",
-        )}
-      >
-        {currentNumber}
-      </motion.div>
+      <div className="@container w-full flex justify-center py-1">
+        {/* The number key replays this Motion entrance for each new question. */}
+        <motion.div
+          key={currentNumber}
+          initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
+          animate={{ scale: 1, opacity: 1, rotate: 0 }}
+          className={cn(
+            "font-display font-semibold not-italic leading-none tracking-[-0.025em] text-app-dark max-w-full text-center",
+            numberSizeClasses[String(currentNumber ?? "").length] ?? "text-8xl",
+          )}
+        >
+          {currentNumber}
+        </motion.div>
+      </div>
 
       <div className="w-full flex flex-col gap-4">
         <div className="relative group">
