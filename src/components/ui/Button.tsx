@@ -12,7 +12,7 @@ const variants: Record<ButtonVariant, string> = {
     "w-full py-4 font-bold text-base bg-app-dark text-app-card hover:bg-app-dark/90 transition-all  active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed",
   next: "min-h-11 px-4 bg-app-dark text-app-card text-sm font-semibold hover:bg-app-dark/90 transition-colors flex items-center justify-center gap-2 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-dark",
   update:
-    "w-full md:w-auto shrink-0 px-8 md:px-5 py-3 md:py-2.5 bg-app-dark text-app-card text-xs font-bold hover:scale-105 active:scale-95 transition-transform  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-dark disabled:cursor-not-allowed disabled:hover:scale-100",
+    "w-full md:w-auto min-h-11 shrink-0 px-8 md:px-5 py-3 md:py-2.5 border-control border-app-border bg-app-card text-app-dark text-xs font-semibold cursor-pointer transition-colors enabled:hover:bg-app-control-hover enabled:active:bg-app-control-active focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-dark disabled:cursor-not-allowed",
 };
 
 export const Button = ({
