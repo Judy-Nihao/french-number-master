@@ -35,7 +35,7 @@ npm run dev
 
 Shared inputs, buttons and cards live in `src/components/ui/`; practice views live in `src/components/practice/`. State and speech logic live in `src/hooks/`. Components and named functions use arrow functions.
 
-Colors, radii, border widths and shadows are centralized in `src/index.css`. Extend component variants for reusable differences rather than copying style classes.
+Colors, radii, border widths and shadows are centralized in `src/index.css`. Outer tool cards use `rounded-card` (32px); inner exercise and mobile range cards use `rounded-card-inner` (24px). Register new semantic utilities in `src/lib/utils.ts` when they need class-merging support. Extend component variants for reusable differences rather than copying style classes.
 
 Responsive styles start with unprefixed mobile classes, then use `md:` (768px and above) and `lg:` (1024px and above) when needed. Keep sibling spacing in parent `gap` utilities.
 
@@ -78,7 +78,7 @@ npm run dev
 
 共用 input、按鈕與卡片位於 `src/components/ui/`，功能介面位於 `src/components/practice/`；狀態與語音邏輯位於 `src/hooks/`。元件與具名函式統一使用 arrow function。
 
-顏色、圓角、線條粗細與陰影集中於 `src/index.css`。可重複使用的樣式差異以元件 variant 擴充，避免複製 class。
+顏色、圓角、線條粗細與陰影集中於 `src/index.css`。外層工具卡片使用 `rounded-card`（32px），內層練習與行動版範圍卡片使用 `rounded-card-inner`（24px）；新增需要 class 合併支援的語意 utility 時，也要更新 `src/lib/utils.ts`。可重複使用的樣式差異以元件 variant 擴充，避免複製 class。
 
 RWD 以無前綴樣式作為行動版預設，再按需使用 `md:`（768px 起）與 `lg:`（1024px 起）擴充。相鄰元素間距由父層 `gap` 統一管理。
 

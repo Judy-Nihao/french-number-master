@@ -13,6 +13,7 @@
     0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
   --radius-card: 2rem;
+  --radius-card-inner: 1.5rem;
   --radius-field: 1rem;
   --radius-pill: calc(infinity * 1px);
 
