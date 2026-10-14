@@ -36,6 +36,7 @@ type SpellingPanelProps = Pick<
   | "handleCompositionUpdate"
   | "dismissKeyboardHint"
   | "isPlaying"
+  | "reducedMotion"
 >;
 
 export const SpellingPanel = ({
@@ -48,6 +49,7 @@ export const SpellingPanel = ({
   handleCheck,
   playAudio,
   isPlaying,
+  reducedMotion,
   handleCompositionUpdate,
   dismissKeyboardHint,
 }: SpellingPanelProps) => (
@@ -62,8 +64,12 @@ export const SpellingPanel = ({
         {/* The number key replays this Motion entrance for each new question. */}
         <motion.div
           key={currentNumber}
-          initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
-          animate={{ scale: 1, opacity: 1, rotate: 0 }}
+          initial={reducedMotion ? false : { scale: 0.96, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{
+            duration: reducedMotion ? 0 : 0.24,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           className={cn(
             "font-display font-semibold not-italic leading-none tracking-[-0.025em] text-app-dark max-w-full text-center",
             numberSizeClasses[String(currentNumber ?? "").length] ?? "text-8xl",
