@@ -34,7 +34,11 @@ export const AnswerFeedback = ({
           : "border-app-border bg-app-answer",
       )}
     >
-      <div className="min-w-0 flex flex-col gap-2 text-center">
+      <div
+        id="answer-feedback"
+        role="status"
+        className="min-w-0 flex flex-col gap-2 text-center"
+      >
         <div className="flex flex-col gap-1">
           <div
             className={cn(

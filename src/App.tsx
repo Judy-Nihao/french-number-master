@@ -31,7 +31,7 @@ const App = () => {
         <div className="w-full max-w-lg flex flex-col gap-4 relative">
           {/* Header */}
           <header className="text-center">
-            <h1 className="font-display text-3xl md:text-5xl font-medium italic text-app-dark">
+            <h1 className="font-display text-3xl md:text-5xl font-medium italic text-app-dark text-balance">
               French Number Master
             </h1>
           </header>
@@ -80,7 +80,6 @@ const App = () => {
                   variant="next"
                   onClick={practice.generateRandomNumber}
                   aria-label="Next question"
-                  className="cursor-pointer"
                 >
                   Next
                   <ArrowRight

@@ -66,6 +66,16 @@ body {
   font-family: var(--font-sans);
 }
 
+::selection {
+  background-color: var(--color-app-primary-light);
+  color: var(--color-app-dark);
+}
+
+input,
+textarea {
+  caret-color: var(--color-app-dark);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-bounce,
   .animate-spin {

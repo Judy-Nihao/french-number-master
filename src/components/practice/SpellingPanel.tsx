@@ -75,6 +75,8 @@ export const SpellingPanel = ({
             onBlur={dismissKeyboardHint}
             state={feedback ?? "default"}
             aria-label="French spelling"
+            aria-invalid={feedback === "incorrect"}
+            aria-describedby={feedback !== null ? "answer-feedback" : undefined}
             ref={inputRef}
             value={userInput}
             onChange={handleAnswerInput}
