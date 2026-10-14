@@ -34,22 +34,24 @@ export const AnswerFeedback = ({
           : "border-app-border bg-app-answer",
       )}
     >
-      <div className="min-w-0 flex flex-col gap-1 text-center">
-        <div
-          className={cn(
-            "text-[10px] uppercase tracking-[0.2em] font-bold",
-            feedback === "correct" ? "text-app-success" : "text-app-red",
-          )}
-        >
-          {feedback === "correct" ? "+Perfect+" : "Correct Answer"}
-        </div>
-        <div
-          className={cn(
-            "text-xl md:text-2xl font-bold wrap-anywhere",
-            feedback === "incorrect" ? "text-app-red" : "text-app-dark",
-          )}
-        >
-          {representation.word}
+      <div className="min-w-0 flex flex-col gap-2 text-center">
+        <div className="flex flex-col gap-1">
+          <div
+            className={cn(
+              "text-[10px] uppercase tracking-[0.2em] font-bold",
+              feedback === "correct" ? "text-app-success" : "text-app-red",
+            )}
+          >
+            {feedback === "correct" ? "Perfect!" : "Correct Answer"}
+          </div>
+          <div
+            className={cn(
+              "text-xl md:text-2xl font-bold wrap-anywhere",
+              feedback === "incorrect" ? "text-app-red" : "text-app-dark",
+            )}
+          >
+            {representation.word}
+          </div>
         </div>
         <div className="text-sm font-medium text-app-dark/75 wrap-anywhere">
           {representation.ipa}
