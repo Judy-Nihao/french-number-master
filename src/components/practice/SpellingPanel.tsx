@@ -61,7 +61,7 @@ export const SpellingPanel = ({
         initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
         className={cn(
-          "font-bold text-app-dark max-w-full wrap-anywhere text-center",
+          "font-display font-semibold not-italic text-app-dark max-w-full wrap-anywhere text-center",
           numberSizeClasses[String(currentNumber ?? "").length] ?? "text-8xl",
         )}
       >
