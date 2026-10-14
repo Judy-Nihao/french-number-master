@@ -70,7 +70,7 @@ export const SpellingPanel = ({
             ease: [0.22, 1, 0.36, 1],
           }}
           className={cn(
-            "font-display font-semibold not-italic leading-none tracking-[-0.025em] text-app-dark max-w-full text-center",
+            "font-sans font-semibold not-italic leading-none tracking-[-0.025em] text-app-dark max-w-full text-center",
             numberSizeClasses[String(currentNumber ?? "").length] ?? "text-8xl",
           )}
         >
