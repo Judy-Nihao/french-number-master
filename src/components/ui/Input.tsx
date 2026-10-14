@@ -15,7 +15,7 @@ export const inputVariants: Record<InputVariant, string> = {
   lookup:
     "px-5 py-4 rounded-pill border-control transition-colors font-medium placeholder:text-app-dark/60",
   range:
-    "min-w-0 min-h-11 px-2 py-2 rounded-field border-control bg-app-bg text-center text-sm font-bold tabular-nums text-app-dark transition-colors disabled:cursor-not-allowed",
+    "min-w-0 min-h-control px-2 py-2 rounded-field border-control bg-app-bg text-center text-sm font-bold tabular-nums text-app-dark transition-colors disabled:cursor-not-allowed",
 };
 
 export const inputStates: Record<InputState, string> = {

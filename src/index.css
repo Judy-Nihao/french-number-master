@@ -12,6 +12,8 @@
   --shadow-elevation-panel:
     0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
+  --spacing-control: 2.75rem;
+
   --radius-card: 2rem;
   --radius-card-inner: 1.5rem;
   --radius-field: 1rem;
@@ -43,6 +45,11 @@
 :root {
   --border-width-control: 1px;
   --border-width-surface: 2px;
+}
+
+@utility control-focus {
+  outline: 2px solid var(--color-app-dark);
+  outline-offset: 2px;
 }
 
 @utility border-control {
