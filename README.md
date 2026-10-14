@@ -18,9 +18,7 @@ French numbers follow fixed composition rules — for example, `quatre-vingt-dix
 
 ## Speech Technology
 
-Speech uses the browser's built-in **Web Speech API** (`window.speechSynthesis`) — no external service or API key needed. The language is set to `fr-FR`, with preference given to French female voices or Google's network voices.
-
-> **Chrome recommended**: Chrome provides additional Google network voices whose quality is close to Google Translate's TTS — noticeably more natural than the synthesized voices built into the operating system. These voices require no installation or API key and are accessed directly through the Web Speech API. Other browsers fall back to system voices, which sound more robotic and vary by device.
+Pronunciation uses the browser's Web Speech API, with no API key required. Available French voices and playback quality depend on the browser and device; some voices require a network connection.
 
 ## Running Locally
 
@@ -31,15 +29,16 @@ npm install
 npm run dev
 ```
 
-## UI Architecture and Maintenance
+## Tech Stack
 
-Shared inputs, buttons and cards live in `src/components/ui/`; practice views live in `src/components/practice/`. State and speech logic live in `src/hooks/`. Components and named functions use arrow functions.
+React, TypeScript, Vite, Tailwind CSS, Motion, and the Web Speech API.
 
-Colors, radii, border widths and shadows are centralized in `src/index.css`. Outer tool cards use `rounded-card` (32px); inner exercise and mobile range cards use `rounded-card-inner` (24px). Register new semantic utilities in `src/lib/utils.ts` when they need class-merging support. Extend component variants for reusable differences rather than copying style classes.
+## Checks and Build
 
-Responsive styles start with unprefixed mobile classes, then use `md:` (768px and above) and `lg:` (1024px and above) when needed. Keep sibling spacing in parent `gap` utilities.
-
-Run `npm run lint` for TypeScript checks and `npm run build` for the production build.
+```bash
+npm run lint   # TypeScript checks
+npm run build  # Production build
+```
 
 ---
 
@@ -61,9 +60,7 @@ Run `npm run lint` for TypeScript checks and `npm run build` for the production 
 
 ## 語音技術
 
-語音功能使用瀏覽器內建的 **Web Speech API**（`window.speechSynthesis`），不需要任何外部服務或 API key。語言設定為 `fr-FR`，並優先選取法語女聲或 Google 自然人聲。
-
-> **建議使用 Chrome**：Chrome 提供額外的 Google 網路語音，音質接近 Google 翻譯的語音，比作業系統內建的合成語音自然許多。這些語音不需要安裝或 API key，透過 Web Speech API 即可直接使用。其他瀏覽器只能調用系統內建的合成語音，聽起來較機械，效果因裝置而異。
+發音使用瀏覽器的 Web Speech API，不需要 API key。可用法語聲音與播放品質依瀏覽器、裝置而異；部分聲音需要網路連線。
 
 ## 本地運行
 
@@ -74,12 +71,13 @@ npm install
 npm run dev
 ```
 
-## 元件架構與維護
+## 技術
 
-共用 input、按鈕與卡片位於 `src/components/ui/`，功能介面位於 `src/components/practice/`；狀態與語音邏輯位於 `src/hooks/`。元件與具名函式統一使用 arrow function。
+React、TypeScript、Vite、Tailwind CSS、Motion 與 Web Speech API。
 
-顏色、圓角、線條粗細與陰影集中於 `src/index.css`。外層工具卡片使用 `rounded-card`（32px），內層練習與行動版範圍卡片使用 `rounded-card-inner`（24px）；新增需要 class 合併支援的語意 utility 時，也要更新 `src/lib/utils.ts`。可重複使用的樣式差異以元件 variant 擴充，避免複製 class。
+## 檢查與打包
 
-RWD 以無前綴樣式作為行動版預設，再按需使用 `md:`（768px 起）與 `lg:`（1024px 起）擴充。相鄰元素間距由父層 `gap` 統一管理。
-
-使用 `npm run lint` 執行 TypeScript 檢查、`npm run build` 執行正式打包。
+```bash
+npm run lint   # TypeScript 檢查
+npm run build  # 正式打包
+```
