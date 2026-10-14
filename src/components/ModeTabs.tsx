@@ -105,7 +105,7 @@ export const ModeTabs = ({
             document.getElementById(`${next}-tab`)?.focus();
           }}
           className={cn(
-            "relative z-10 min-h-12 px-2 py-3 rounded-pill text-xs md:text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-dark",
+            "relative z-10 min-h-11 px-2 py-2 rounded-pill text-xs md:text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-dark",
             mode === tabMode
               ? "text-app-card"
               : "text-app-dark/70 hover:text-app-dark",
