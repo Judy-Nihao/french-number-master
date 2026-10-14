@@ -105,10 +105,10 @@ export const ModeTabs = ({
             document.getElementById(`${next}-tab`)?.focus();
           }}
           className={cn(
-            "relative z-10 min-h-11 px-2 py-2 rounded-pill text-xs md:text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-dark",
+            "relative z-10 min-h-11 px-2 py-2 rounded-pill text-xs md:text-sm font-bold cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-app-dark",
             mode === tabMode
-              ? "text-app-card"
-              : "text-app-dark/70 hover:text-app-dark",
+              ? "text-app-card hover:bg-white/10 active:bg-white/20"
+              : "text-app-dark/70 hover:text-app-dark hover:bg-app-control-hover active:bg-app-control-active",
           )}
         >
           {tabMode === "test" ? "Spelling" : "Lookup"}
