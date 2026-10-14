@@ -1,6 +1,7 @@
 import { FloatingNotice } from "./components/practice/FloatingNotice";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./components/ui/Button";
+import { AnimatedHeight } from "./components/ui/AnimatedHeight";
 import { Card } from "./components/ui/Card";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
 import { ModeTabs } from "./components/ModeTabs";
@@ -40,56 +41,62 @@ const App = () => {
             {/* Range settings */}
             <RangeSettings {...practice} />
 
-            {/* Main Exercise Card */}
-            <Card
-              state={
-                mode === "test" && practice.feedback === "incorrect"
-                  ? "incorrect"
-                  : "default"
-              }
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                {/* Motion coordinates directional enter/exit with AnimatePresence and reduced-motion preferences. */}
-                <motion.div
-                  key={mode}
-                  initial={{
-                    opacity: 0,
-                    x: reducedMotion ? 0 : mode === "lookup" ? 18 : -18,
-                  }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{
-                    opacity: 0,
-                    x: reducedMotion ? 0 : mode === "test" ? -18 : 18,
-                  }}
-                  transition={{
-                    duration: reducedMotion ? 0.08 : 0.16,
-                    ease: "easeOut",
-                  }}
-                >
-                  {mode === "test" ? (
-                    <SpellingPanel {...practice} />
-                  ) : (
-                    <LookupPanel {...practice} />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </Card>
-            {mode === "test" && practice.feedback !== null && (
-              <div className="flex justify-center">
-                <Button
-                  variant="next"
-                  onClick={practice.generateRandomNumber}
-                  aria-label="Next question"
-                >
-                  Next
-                  <ArrowRight
-                    size={16}
-                    aria-hidden="true"
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </Button>
-              </div>
-            )}
+            <div>
+              {/* Main Exercise Card */}
+              <Card
+                state={
+                  mode === "test" && practice.feedback === "incorrect"
+                    ? "incorrect"
+                    : "default"
+                }
+              >
+                <AnimatedHeight>
+                  <AnimatePresence mode="popLayout" initial={false}>
+                    {/* popLayout removes the exiting panel from measurement while the incoming panel sets the target height. */}
+                    <motion.div
+                      key={mode}
+                      initial={{
+                        opacity: 0.35,
+                        x: reducedMotion ? 0 : mode === "lookup" ? 6 : -6,
+                      }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{
+                        opacity: 0,
+                        x: reducedMotion ? 0 : mode === "test" ? -6 : 6,
+                      }}
+                      transition={{
+                        duration: reducedMotion ? 0 : 0.18,
+                        ease: "easeOut",
+                      }}
+                    >
+                      {mode === "test" ? (
+                        <SpellingPanel {...practice} />
+                      ) : (
+                        <LookupPanel {...practice} />
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </AnimatedHeight>
+              </Card>
+              <AnimatedHeight className="overflow-visible">
+                {mode === "test" && practice.feedback !== null && (
+                  <div className="flex justify-center pt-4">
+                    <Button
+                      variant="next"
+                      onClick={practice.generateRandomNumber}
+                      aria-label="Next question"
+                    >
+                      Next
+                      <ArrowRight
+                        size={16}
+                        aria-hidden="true"
+                        className="group-hover:translate-x-1 transition-transform"
+                      />
+                    </Button>
+                  </div>
+                )}
+              </AnimatedHeight>
+            </div>
             <ModeTabs mode={mode} onChange={setMode} />
           </Card>
         </div>

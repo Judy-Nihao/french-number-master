@@ -1,7 +1,6 @@
 import { cn } from "../../lib/utils";
 import { AutoResizeTextarea } from "../ui/AutoResizeTextarea";
 import { Button } from "../ui/Button";
-import { AnimatedHeight } from "../ui/AnimatedHeight";
 import { AnswerFeedback } from "./AnswerFeedback";
 import { motion } from "motion/react";
 import type { PracticeController } from "../../hooks/useNumberPractice";
@@ -53,7 +52,7 @@ export const SpellingPanel = ({
   handleCompositionUpdate,
   dismissKeyboardHint,
 }: SpellingPanelProps) => (
-  <AnimatedHeight
+  <div
     id="test-panel"
     role="tabpanel"
     aria-labelledby="test-tab"
@@ -114,5 +113,5 @@ export const SpellingPanel = ({
         playAudio={playAudio}
       />
     )}
-  </AnimatedHeight>
+  </div>
 );
