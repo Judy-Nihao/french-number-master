@@ -3,6 +3,7 @@ import { AutoResizeTextarea } from "../ui/AutoResizeTextarea";
 import { Button } from "../ui/Button";
 import { AnswerFeedback } from "./AnswerFeedback";
 import { motion } from "motion/react";
+import { CornerDownLeft } from "lucide-react";
 import type { PracticeController } from "../../hooks/useNumberPractice";
 
 // Static classes combine digit-based caps with the available number-row width.
@@ -52,12 +53,7 @@ export const SpellingPanel = ({
   handleCompositionUpdate,
   dismissKeyboardHint,
 }: SpellingPanelProps) => (
-  <div
-    id="test-panel"
-    role="tabpanel"
-    aria-labelledby="test-tab"
-    tabIndex={0}
-  >
+  <div id="test-panel" role="tabpanel" aria-labelledby="test-tab" tabIndex={0}>
     <div className="p-6 pt-8 flex flex-col gap-4 items-center relative z-10">
       <div className="@container w-full flex justify-center py-1">
         {/* The number key replays this Motion entrance for each new question. */}
@@ -92,13 +88,33 @@ export const SpellingPanel = ({
             onChange={handleAnswerInput}
             onKeyDown={handleKeyDown}
             placeholder="Type in French..."
+            enterKeyHint="done"
             disabled={feedback !== null}
           />
         </div>
 
         {feedback === null && (
-          <Button variant="primary" onClick={handleCheck} disabled={!userInput}>
+          <Button
+            variant="primary"
+            onClick={handleCheck}
+            disabled={!userInput}
+            aria-describedby="check-answer-shortcut"
+            aria-keyshortcuts="Enter"
+            className="group/shortcut relative flex items-center justify-center gap-2"
+          >
             Check Answer
+            <CornerDownLeft
+              size={16}
+              aria-hidden="true"
+              className="shrink-0 opacity-60"
+            />
+            <span
+              id="check-answer-shortcut"
+              role="tooltip"
+              className="pointer-events-none absolute bottom-[calc(100%+0.5rem)] hidden whitespace-nowrap rounded-field border-control border-app-border bg-app-card px-3 py-2 text-xs font-medium text-app-dark opacity-0 transition-opacity md:block group-hover/shortcut:opacity-100 group-focus-visible/shortcut:opacity-100"
+            >
+              Press Enter to check
+            </span>
           </Button>
         )}
       </div>
