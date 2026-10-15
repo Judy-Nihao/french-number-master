@@ -8,14 +8,14 @@ import type { PracticeController } from "../../hooks/useNumberPractice";
 
 // Static classes combine digit-based caps with the available number-row width.
 const numberSizeClasses: Record<number, string> = {
-  3: "text-[clamp(1rem,calc(100cqi/2.1),5.5rem)]",
-  4: "text-[clamp(1rem,calc(100cqi/2.8),4.5rem)]",
-  5: "text-[clamp(1rem,calc(100cqi/3.5),3.75rem)]",
-  6: "text-[clamp(1rem,calc(100cqi/4.2),3.5rem)]",
-  7: "text-[clamp(1rem,calc(100cqi/4.9),3rem)]",
-  8: "text-[clamp(1rem,calc(100cqi/5.6),2.75rem)]",
-  9: "text-[clamp(1rem,calc(100cqi/6.3),2.5rem)]",
-  10: "text-[clamp(1rem,calc(100cqi/7),2.25rem)]",
+  3: "text-[clamp(1rem,calc(100cqi/2.1),4.75rem)]",
+  4: "text-[clamp(1rem,calc(100cqi/2.8),4rem)]",
+  5: "text-[clamp(1rem,calc(100cqi/3.5),3.5rem)]",
+  6: "text-[clamp(1rem,calc(100cqi/4.2),3.25rem)]",
+  7: "text-[clamp(1rem,calc(100cqi/4.9),2.875rem)]",
+  8: "text-[clamp(1rem,calc(100cqi/5.6),2.625rem)]",
+  9: "text-[clamp(1rem,calc(100cqi/6.3),2.375rem)]",
+  10: "text-[clamp(1rem,calc(100cqi/7),2.125rem)]",
   11: "text-[clamp(1rem,calc(100cqi/7.7),2rem)]",
   12: "text-[clamp(1rem,calc(100cqi/8.4),1.875rem)]",
   13: "text-[clamp(1rem,calc(100cqi/9.1),1.75rem)]",
@@ -67,7 +67,7 @@ export const SpellingPanel = ({
           }}
           className={cn(
             "font-sans font-semibold not-italic leading-none tracking-[-0.025em] text-app-dark max-w-full text-center",
-            numberSizeClasses[String(currentNumber ?? "").length] ?? "text-8xl",
+            numberSizeClasses[String(currentNumber ?? "").length] ?? "text-[5rem]",
           )}
         >
           {currentNumber}

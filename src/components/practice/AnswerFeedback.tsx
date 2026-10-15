@@ -50,7 +50,7 @@ export const AnswerFeedback = ({
           </div>
           <div
             className={cn(
-              "text-xl md:text-2xl font-bold wrap-anywhere",
+              "text-2xl md:text-[1.75rem] leading-snug font-bold wrap-anywhere",
               feedback === "incorrect" ? "text-app-red" : "text-app-dark",
             )}
           >

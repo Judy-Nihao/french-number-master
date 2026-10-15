@@ -13,9 +13,9 @@ export const PronunciationButton = ({
 }: PronunciationButtonProps) => (
   <Button variant="icon" disabled={disabled || isPlaying} {...props}>
     {isPlaying ? (
-      <Loader2 size={20} className="animate-spin" />
+      <Loader2 size={24} className="animate-spin" />
     ) : (
-      <Volume2 size={20} />
+      <Volume2 size={24} />
     )}
   </Button>
 );
