@@ -6,21 +6,12 @@ import { motion } from "motion/react";
 import { CornerDownLeft } from "lucide-react";
 import type { PracticeController } from "../../hooks/useNumberPractice";
 
-// Static classes combine digit-based caps with the available number-row width.
-const numberSizeClasses: Record<number, string> = {
-  3: "text-[clamp(1rem,calc(100cqi/2.1),4.75rem)]",
-  4: "text-[clamp(1rem,calc(100cqi/2.8),4rem)]",
-  5: "text-[clamp(1rem,calc(100cqi/3.5),3.5rem)]",
-  6: "text-[clamp(1rem,calc(100cqi/4.2),3.25rem)]",
-  7: "text-[clamp(1rem,calc(100cqi/4.9),2.875rem)]",
-  8: "text-[clamp(1rem,calc(100cqi/5.6),2.625rem)]",
-  9: "text-[clamp(1rem,calc(100cqi/6.3),2.375rem)]",
-  10: "text-[clamp(1rem,calc(100cqi/7),2.125rem)]",
-  11: "text-[clamp(1rem,calc(100cqi/7.7),2rem)]",
-  12: "text-[clamp(1rem,calc(100cqi/8.4),1.875rem)]",
-  13: "text-[clamp(1rem,calc(100cqi/9.1),1.75rem)]",
-  14: "text-[clamp(1rem,calc(100cqi/9.8),1.625rem)]",
-  15: "text-[clamp(1rem,calc(100cqi/10.5),1.5rem)]",
+// Three size bands use container width rather than per-digit style overrides.
+const getNumberSizeClass = (number: number | null) => {
+  const digits = String(number ?? "").length;
+  if (digits <= 4) return "text-[clamp(1rem,32cqi,5rem)]";
+  if (digits <= 9) return "text-[clamp(1rem,17cqi,3.5rem)]";
+  return "text-[clamp(1rem,10cqi,2rem)]";
 };
 
 type SpellingPanelProps = Pick<
@@ -66,8 +57,9 @@ export const SpellingPanel = ({
             ease: [0.22, 1, 0.36, 1],
           }}
           className={cn(
-            "font-sans font-semibold not-italic leading-none tracking-[-0.025em] text-app-dark max-w-full text-center",
-            numberSizeClasses[String(currentNumber ?? "").length] ?? "text-[5rem]",
+            "font-sans font-semibold tracking-[-0.025em] text-app-dark max-w-full text-center",
+            getNumberSizeClass(currentNumber),
+            "leading-none",
           )}
         >
           {currentNumber}
