@@ -18,17 +18,8 @@ const App = () => {
   return (
     <MotionConfig reducedMotion="user">
       <FloatingNotice
-        message={
-          practice.keyboardHint
-            ? "Switch to a Latin alphabet keyboard."
-            : undefined
-        }
-        visible={
-          practice.keyboardHint ||
-          (mode === "test" &&
-            (practice.minRange !== Number(practice.tempMin) ||
-              practice.maxRange !== Number(practice.tempMax)))
-        }
+        message="Switch to a Latin alphabet keyboard."
+        visible={practice.keyboardHint}
       />
       <div
         ref={pageRef}

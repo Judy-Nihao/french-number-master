@@ -10,6 +10,7 @@ type RangeSettingsProps = Pick<
   | "handleCompositionUpdate"
   | "dismissKeyboardHint"
   | "mode"
+  | "hasPendingRange"
   | "tempMin"
   | "tempMax"
   | "setTempMin"
@@ -20,6 +21,7 @@ type RangeSettingsProps = Pick<
 
 export const RangeSettings = ({
   mode,
+  hasPendingRange,
   tempMin,
   tempMax,
   setTempMin,
@@ -65,10 +67,30 @@ export const RangeSettings = ({
       <Button
         variant="update"
         onClick={handleUpdateRange}
-        className="flex items-center justify-center gap-2"
+        className={cn(
+          "flex items-center justify-center gap-2",
+          hasPendingRange &&
+            "bg-app-notice border-app-dark/20 enabled:hover:bg-app-primary-light",
+        )}
       >
         <Settings2 size={16} aria-hidden="true" />
-        Update Range
+        <span className="grid" aria-live="polite" aria-atomic="true">
+          <span
+            aria-hidden="true"
+            className="invisible col-start-1 row-start-1"
+          >
+            Update Range
+          </span>
+          <span
+            aria-hidden="true"
+            className="invisible col-start-1 row-start-1"
+          >
+            Apply Changes
+          </span>
+          <span className="col-start-1 row-start-1">
+            {hasPendingRange ? "Apply Changes" : "Update Range"}
+          </span>
+        </span>
       </Button>
     </Card>
   </fieldset>

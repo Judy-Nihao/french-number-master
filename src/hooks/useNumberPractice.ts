@@ -225,6 +225,11 @@ export const useNumberPractice = () => {
   };
 
   return {
+    hasPendingRange:
+      tempMin === "" ||
+      tempMax === "" ||
+      Number(tempMin) !== minRange ||
+      Number(tempMax) !== maxRange,
     keyboardHint,
     handleCompositionUpdate,
     dismissKeyboardHint,
