@@ -9,10 +9,12 @@ import { RangeSettings } from "./components/practice/RangeSettings";
 import { SpellingPanel } from "./components/practice/SpellingPanel";
 import { LookupPanel } from "./components/practice/LookupPanel";
 import { useNumberPractice } from "./hooks/useNumberPractice";
+import { useKeyboardViewport } from "./hooks/useKeyboardViewport";
 
 const App = () => {
   const practice = useNumberPractice();
   const { mode, setMode, reducedMotion } = practice;
+  const { pageRef, alignmentRef } = useKeyboardViewport(mode);
   return (
     <MotionConfig reducedMotion="user">
       <FloatingNotice
@@ -28,7 +30,10 @@ const App = () => {
               practice.maxRange !== Number(practice.tempMax)))
         }
       />
-      <div className="min-h-screen bg-app-bg flex flex-col items-center py-6 px-4 md:py-12 md:px-6 overflow-x-clip">
+      <div
+        ref={pageRef}
+        className="min-h-[calc(100vh+var(--keyboard-inset,0px))] bg-app-bg flex flex-col items-center py-6 px-4 md:py-12 md:px-6 overflow-x-clip"
+      >
         <div className="w-full max-w-lg flex flex-col gap-4 relative">
           {/* Header */}
           <header className="text-center">
@@ -41,7 +46,7 @@ const App = () => {
             {/* Range settings */}
             <RangeSettings {...practice} />
 
-            <div>
+            <div ref={alignmentRef}>
               {/* Main Exercise Card */}
               <Card
                 state={
