@@ -29,7 +29,7 @@ export const LookupPanel = ({
     role="tabpanel"
     aria-labelledby="lookup-tab"
     tabIndex={0}
-    className="flex flex-col gap-6 px-6 md:px-8 md:py-10"
+    className="flex flex-col gap-6 p-6 md:px-8 md:py-10"
   >
     <h2 className="text-center text-xl font-bold text-app-dark">
       Number → French
