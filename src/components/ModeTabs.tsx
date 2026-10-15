@@ -102,7 +102,9 @@ export const ModeTabs = ({
                     ? "lookup"
                     : "test";
             onChange(next);
-            document.getElementById(`${next}-tab`)?.focus();
+            document
+              .getElementById(`${next}-tab`)
+              ?.focus({ preventScroll: true });
           }}
           className={cn(
             "relative z-10 min-h-control px-2 py-2 rounded-pill text-xs md:text-sm font-bold cursor-pointer transition-colors focus-visible:control-focus",

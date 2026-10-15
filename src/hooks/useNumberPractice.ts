@@ -1,5 +1,11 @@
 import { useFrenchSpeech } from "./useFrenchSpeech";
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+  useRef,
+} from "react";
 import { useReducedMotion } from "motion/react";
 import confetti from "canvas-confetti";
 import { getFrenchRepresentation } from "../utils/frenchConverter";
@@ -34,6 +40,7 @@ export const useNumberPractice = () => {
   const poolRef = useRef<number[]>([]);
   const lastNumberRef = useRef<number | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const focusNextQuestionRef = useRef(false);
 
   const generateRandomNumber = useCallback(() => {
     const rangeSize = maxRange - minRange + 1;
@@ -77,12 +84,23 @@ export const useNumberPractice = () => {
     setKeyboardHint(false);
     setUserInput("");
     setFeedback(null);
-    setTimeout(() => inputRef.current?.focus(), 100);
   }, [minRange, maxRange]);
 
   useEffect(() => {
     generateRandomNumber();
   }, [generateRandomNumber]);
+
+  useLayoutEffect(() => {
+    if (!focusNextQuestionRef.current) return;
+    focusNextQuestionRef.current = false;
+    // Restore focus only after an explicit Next action, once the field is enabled again.
+    inputRef.current?.focus({ preventScroll: true });
+  }, [currentNumber, feedback]);
+
+  const handleNextQuestion = () => {
+    focusNextQuestionRef.current = true;
+    generateRandomNumber();
+  };
 
   const handleLookup = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -199,7 +217,7 @@ export const useNumberPractice = () => {
     if (e.key === "Enter" && !e.nativeEvent.isComposing) {
       e.preventDefault();
       if (feedback !== null) {
-        generateRandomNumber();
+        handleNextQuestion();
       } else {
         handleCheck();
       }
@@ -225,6 +243,7 @@ export const useNumberPractice = () => {
     reducedMotion,
     inputRef,
     generateRandomNumber,
+    handleNextQuestion,
     handleLookup,
     playLookupAudio,
     handleRangeInput,

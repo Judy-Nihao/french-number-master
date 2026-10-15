@@ -83,7 +83,7 @@ const App = () => {
                   <div className="flex justify-center pt-4">
                     <Button
                       variant="next"
-                      onClick={practice.generateRandomNumber}
+                      onClick={practice.handleNextQuestion}
                       aria-label="Next question"
                     >
                       Next
