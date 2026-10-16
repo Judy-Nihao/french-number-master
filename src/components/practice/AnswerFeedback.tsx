@@ -42,8 +42,9 @@ export const AnswerFeedback = ({
         <div className="flex flex-col gap-1">
           <div
             className={cn(
-              "text-[10px] uppercase tracking-[0.2em] font-bold",
-              feedback === "correct" ? "text-app-success" : "text-app-red",
+              feedback === "correct"
+                ? "font-display text-lg leading-6 font-medium italic text-app-success"
+                : "text-[10px] uppercase tracking-[0.2em] font-bold text-app-red",
             )}
           >
             {feedback === "correct" ? "Perfect!" : "Correct Answer"}

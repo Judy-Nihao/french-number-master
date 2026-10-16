@@ -27,9 +27,12 @@ const App = () => {
       >
         <div className="w-full max-w-lg flex flex-col gap-4 relative">
           {/* Header */}
-          <header className="text-center">
-            <h1 className="font-display text-3xl md:text-5xl font-medium italic text-app-dark text-balance">
-              French Number Master
+          <header className="@container px-3 text-left md:px-6">
+            <h1 className="flex flex-col items-start gap-1 font-sans font-bold tracking-[-0.035em] text-app-dark">
+              <span className="font-display text-[clamp(2.75rem,11cqi,3.5rem)] leading-none font-medium italic">
+                French
+              </span>
+              <span className="text-[clamp(1.75rem,8cqi,2.5rem)] leading-tight">Number Master</span>
             </h1>
           </header>
 
@@ -39,9 +42,7 @@ const App = () => {
 
             <div ref={alignmentRef}>
               {/* Main Exercise Card */}
-              <Card
-                data-mode={mode === "test" ? "spelling" : "lookup"}
-              >
+              <Card data-mode={mode === "test" ? "spelling" : "lookup"}>
                 <AnimatedHeight>
                   <AnimatePresence mode="popLayout" initial={false}>
                     {/* popLayout removes the exiting panel from measurement while the incoming panel sets the target height. */}

@@ -32,7 +32,8 @@ export const LookupPanel = ({
     className="exercise-question flex flex-col gap-6 p-6 md:px-8 md:py-10"
   >
     <h2 className="text-center text-xl font-bold text-app-dark">
-      Number → French
+      Number →{" "}
+      <span className="font-display text-2xl font-medium italic">French</span>
     </h2>
     <div className="relative">
       <NumberInput
