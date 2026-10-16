@@ -29,22 +29,18 @@ const App = () => {
           {/* Header */}
           <header className="@container relative px-3 text-left md:px-6">
             <h1 className="flex flex-col items-start gap-1 font-sans font-bold tracking-[-0.035em] text-app-dark">
-              <span className="font-display text-[clamp(2.75rem,11cqi,3.5rem)] leading-none font-medium italic">
-                French
+              <span className="flex w-full items-end justify-between gap-2">
+                <span className="font-display text-[clamp(2.75rem,11cqi,3.5rem)] leading-none font-medium italic">
+                  French
+                </span>
+                <span aria-hidden="true" className="pointer-events-none flex shrink-0 items-center gap-1 tracking-normal select-none md:gap-2">
+                  <span className="flex h-7 items-center rounded-2xl rounded-bl-none border-control border-app-dark/70 bg-app-shell px-1.5 text-xs leading-none font-medium md:h-9 md:px-3 md:text-sm">un</span>
+                  <span className="flex h-7 items-center rounded-2xl rounded-br-none border-control border-app-dark/70 bg-app-shell px-1.5 font-display text-sm leading-none font-medium italic md:h-9 md:px-3 md:text-lg">deux</span>
+                  <span className="flex h-7 items-center rounded-2xl rounded-bl-none border-control border-app-dark/70 bg-app-shell px-1.5 text-xs leading-none font-medium md:h-9 md:px-3 md:text-sm">trois</span>
+                </span>
               </span>
               <span className="text-[clamp(1.75rem,8cqi,2.5rem)] leading-tight">Number Master</span>
             </h1>
-            <div aria-hidden="true" className="pointer-events-none absolute right-5 top-1/2 grid w-28 -translate-y-1/2 grid-cols-[auto_auto] items-center gap-x-2 gap-y-2 select-none md:right-10 md:w-40 md:gap-x-3 md:gap-y-3">
-              <span className="justify-self-end rounded-2xl rounded-bl-none border-control border-app-dark/70 bg-app-shell px-2 py-1 font-sans text-sm leading-none font-medium text-app-dark md:px-3 md:py-2 md:text-base">
-                un
-              </span>
-              <span className="justify-self-end rounded-2xl rounded-br-none border-control border-app-dark/70 bg-app-shell px-2 py-1 font-display text-lg leading-none font-medium italic text-app-dark md:px-3 md:py-2 md:text-2xl">
-                deux
-              </span>
-              <span className="col-span-2 justify-self-center rounded-2xl rounded-bl-none border-control border-app-dark/70 bg-app-shell px-3 py-1 font-sans text-sm leading-none font-medium text-app-dark md:px-4 md:py-2 md:text-base">
-                trois
-              </span>
-            </div>
           </header>
 
           <Card variant="tool">
