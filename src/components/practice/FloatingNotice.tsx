@@ -33,16 +33,20 @@ export const FloatingNotice = ({
       const viewport = window.visualViewport;
       const viewLeft = viewport?.offsetLeft ?? 0;
       const viewTop = viewport?.offsetTop ?? 0;
-      const width = Math.min(288, (viewport?.width ?? window.innerWidth) - 32);
+      const viewWidth = viewport?.width ?? window.innerWidth;
+      const width = Math.min(288, viewWidth - 32);
+      const mobile = window.matchMedia("(width < 768px)").matches;
       const above = rect.top - viewTop >= 64;
       setPosition({
-        left: Math.max(
-          viewLeft + 16,
-          Math.min(
-            rect.left + rect.width / 2 - width / 2,
-            viewLeft + (viewport?.width ?? window.innerWidth) - width - 16,
-          ),
-        ),
+        left: mobile
+          ? viewLeft + (viewWidth - width) / 2
+          : Math.max(
+              viewLeft + 16,
+              Math.min(
+                rect.left + rect.width / 2 - width / 2,
+                viewLeft + (viewport?.width ?? window.innerWidth) - width - 16,
+              ),
+            ),
         top: above ? rect.top - 8 : rect.bottom + 8,
         width,
         above,
