@@ -70,7 +70,7 @@ export const RangeSettings = ({
         className={cn(
           "flex items-center justify-center gap-2",
           hasPendingRange &&
-            "bg-app-notice border-app-dark/20 enabled:hover:bg-app-primary-light",
+            "bg-app-primary border-app-dark/30 enabled:hover:bg-app-primary/85 enabled:active:bg-app-primary/70",
         )}
       >
         <Settings2 size={16} aria-hidden="true" />
@@ -87,7 +87,13 @@ export const RangeSettings = ({
           >
             Apply Changes
           </span>
-          <span className="col-start-1 row-start-1">
+          <span
+            className={cn(
+              "col-start-1 row-start-1",
+              hasPendingRange && mode === "test" &&
+                "motion-safe:animate-[range-nudge_450ms_ease-out_1]",
+            )}
+          >
             {hasPendingRange ? "Apply Changes" : "Update Range"}
           </span>
         </span>

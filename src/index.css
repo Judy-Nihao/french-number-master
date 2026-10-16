@@ -99,6 +99,13 @@ textarea {
   caret-color: var(--color-app-dark);
 }
 
+/* One gentle nudge when a range becomes pending; never loop while the user types. */
+@keyframes range-nudge {
+  0%, 100% { transform: translateY(0); }
+  35% { transform: translateY(-2px); }
+  65% { transform: translateY(1px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-bounce,
   .animate-spin {
