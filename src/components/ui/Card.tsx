@@ -4,7 +4,6 @@ import { cn } from "../../lib/utils";
 type CardVariant = "tool" | "exercise" | "range" | "lookupResult";
 type CardProps = ComponentPropsWithoutRef<"div"> & {
   variant?: CardVariant;
-  state?: "default" | "incorrect";
 };
 
 const variants: Record<CardVariant, string> = {
@@ -18,7 +17,6 @@ const variants: Record<CardVariant, string> = {
 
 export const Card = ({
   variant = "exercise",
-  state = "default",
   className,
   ...props
 }: CardProps) => (
@@ -26,7 +24,6 @@ export const Card = ({
     className={cn(
       "bg-app-card",
       variants[variant],
-      variant === "exercise" && state === "incorrect" && "bg-app-error-panel",
       className,
     )}
     {...props}

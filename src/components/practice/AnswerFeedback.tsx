@@ -30,7 +30,7 @@ export const AnswerFeedback = ({
       className={cn(
         "flex flex-col gap-3 border-t p-6",
         feedback === "incorrect"
-          ? "border-app-red/40 bg-app-error-light"
+          ? "border-app-red/20 bg-app-error-light"
           : "border-app-border bg-app-answer",
       )}
     >
