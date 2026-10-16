@@ -31,10 +31,8 @@
   --color-app-border: #dcdfe3;
   --color-app-input-border: #92998f;
   --color-app-shell: #ffffff;
-  --color-app-answer: #edf4e8;
+  --color-app-answer: #e3eddc;
   --color-app-card: #fafbfc;
-  --color-app-mode-spelling: #cce78b;
-  --color-app-mode-lookup: #c5c5f3;
   --color-app-glow-lime: #e5edb5;
   --color-app-glow-mint: #c5e9dc;
   --color-app-glow-lavender: #dedbf5;
@@ -78,34 +76,17 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Static, transparent color pools keep the center quiet and never change layout. */
-.exercise-surface {
+/* Round color clouds belong to the question, so revealing an answer never stretches them. */
+.exercise-question {
   background-image:
-    radial-gradient(ellipse at 96% 100%, var(--color-app-glow-mint), transparent 62%),
-    radial-gradient(ellipse at 5% 115%, var(--color-app-glow-lime), transparent 60%);
+    radial-gradient(circle 110px at 62% 44%, var(--color-app-glow-mint) 0%, transparent 100%),
+    radial-gradient(circle 125px at 40% 40%, var(--color-app-glow-lime) 12%, transparent 100%);
 }
 
-.exercise-surface[data-mode="lookup"] {
+.exercise-surface[data-mode="lookup"] .exercise-question {
   background-image:
-    radial-gradient(ellipse at 100% 110%, var(--color-app-glow-lavender), transparent 65%),
-    radial-gradient(ellipse at 0% 110%, var(--color-app-glow-mint), transparent 58%);
-}
-
-/* A small inset bookmark identifies the mode without adding a header row. */
-.exercise-surface::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 24px;
-  width: 64px;
-  height: 6px;
-  border-radius: 0 0 6px 6px;
-  background: var(--color-app-mode-spelling);
-  pointer-events: none;
-}
-
-.exercise-surface[data-mode="lookup"]::before {
-  background: var(--color-app-mode-lookup);
+    radial-gradient(circle 110px at 62% 42%, var(--color-app-glow-lavender) 0%, transparent 100%),
+    radial-gradient(circle 125px at 40% 38%, var(--color-app-glow-mint) 12%, transparent 100%);
 }
 
 ::selection {

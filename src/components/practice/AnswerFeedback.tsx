@@ -31,7 +31,7 @@ export const AnswerFeedback = ({
         "flex flex-col gap-3 border-t p-6",
         feedback === "incorrect"
           ? "border-app-red/20 bg-app-error-light"
-          : "border-app-border bg-app-answer",
+          : "border-app-success/25 bg-app-answer",
       )}
     >
       <div
