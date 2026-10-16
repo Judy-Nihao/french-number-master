@@ -84,7 +84,7 @@ export const FloatingNotice = ({
             initial={{ opacity: 0, y: reducedMotion ? 0 : 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: reducedMotion ? 0 : 0.15 }}
-            className="rounded-field border-control border-app-border bg-app-notice px-3 py-2 text-center text-xs font-medium text-app-dark/80"
+            className="rounded-field border-control border-app-input-border/60 bg-app-shell px-3 py-2 text-center text-xs font-medium text-app-dark shadow-elevation-control"
           >
             {message}
           </motion.div>
