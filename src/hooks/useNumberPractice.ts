@@ -186,9 +186,20 @@ export const useNumberPractice = () => {
     const correctWord = representation.word.toLowerCase();
     const input = userInput.trim().toLowerCase();
 
-    // Normalize: Treat hyphens as spaces and squeeze multiple spaces into one
+    // Make matching more forgiving without changing the French spelling shown in the answer.
+    // Both strings are already lowercase from the lines above.
     const normalize = (str: string) =>
-      str.replace(/-/g, " ").replace(/\s+/g, " ").trim();
+      str
+        // Split accented letters into a base letter and a mark: é → e + accent.
+        .normalize("NFD")
+        // Remove those marks: zéro → zero. This does not remove all non-English letters.
+        .replace(/\p{M}/gu, "")
+        // Treat hyphens like spaces: dix-neuf → dix neuf.
+        .replace(/-/g, " ")
+        // Keep one space between words, even if several were typed.
+        .replace(/\s+/g, " ")
+        // Remove spaces at the start and end.
+        .trim();
 
     if (normalize(input) === normalize(correctWord)) {
       setFeedback("correct");
