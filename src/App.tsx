@@ -79,11 +79,7 @@ const App = () => {
                       aria-label="Next question"
                     >
                       Next
-                      <ArrowRight
-                        size={16}
-                        aria-hidden="true"
-                        className="group-hover:translate-x-1 transition-transform"
-                      />
+                      <ArrowRight size={16} aria-hidden="true" />
                     </Button>
                   </div>
                 )}
