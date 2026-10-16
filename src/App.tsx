@@ -31,15 +31,10 @@ const App = () => {
             <h1 className="flex flex-col items-start gap-1 font-sans font-bold tracking-[-0.035em] text-app-dark">
               <span className="flex w-full items-end justify-between gap-2">
                 <span className="font-display text-[clamp(2.75rem,11cqi,3.5rem)] leading-none font-medium italic">
-                  French
-                </span>
-                <span aria-hidden="true" className="pointer-events-none flex shrink-0 items-center gap-1 tracking-normal select-none md:gap-2">
-                  <span className="flex h-7 items-center rounded-2xl rounded-bl-none border-control border-app-dark/70 bg-app-shell px-1.5 text-xs leading-none font-medium md:h-9 md:px-3 md:text-sm">un</span>
-                  <span className="flex h-7 items-center rounded-2xl rounded-br-none border-control border-app-dark/70 bg-app-shell px-1.5 font-display text-sm leading-none font-medium italic md:h-9 md:px-3 md:text-lg">deux</span>
-                  <span className="flex h-7 items-center rounded-2xl rounded-bl-none border-control border-app-dark/70 bg-app-shell px-1.5 text-xs leading-none font-medium md:h-9 md:px-3 md:text-sm">trois</span>
+                  French <span aria-hidden="true" className="inline-block align-middle font-sans text-[0.75em] not-italic tracking-normal">🇫🇷</span>
                 </span>
               </span>
-              <span className="text-[clamp(1.75rem,8cqi,2.5rem)] leading-tight">Number Master</span>
+              <span className="text-[clamp(1.75rem,8cqi,2.5rem)] leading-tight tracking-normal">Number Master <span aria-hidden="true" className="inline-block align-middle text-[0.75em]">🏆</span></span>
             </h1>
           </header>
 
