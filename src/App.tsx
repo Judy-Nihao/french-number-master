@@ -80,7 +80,11 @@ const App = () => {
                       aria-label="Next question"
                     >
                       Next
-                      <ArrowRight size={16} aria-hidden="true" />
+                      <ArrowRight
+                        size={16}
+                        aria-hidden="true"
+                        className="transition-transform duration-150 group-hover:translate-x-1 group-active:translate-x-1.5 motion-reduce:transform-none motion-reduce:transition-none"
+                      />
                     </Button>
                   </div>
                 )}
