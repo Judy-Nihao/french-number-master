@@ -6,7 +6,7 @@
   --shadow-elevation-subtle:
     0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-elevation-control:
-    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    0 8px 28px -12px rgb(28 35 48 / 0.16), 0 2px 6px -3px rgb(28 35 48 / 0.08);
   --shadow-elevation-action:
     0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-elevation-panel:
@@ -22,17 +22,22 @@
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --color-app-bg: #f2f4ef;
+  --color-app-bg: #f1f2f4;
   --color-app-notice: #e1edce;
   --color-app-primary: #a5ce3f;
   --color-app-primary-light: #e6edda;
   --color-app-dark: #07100b;
   --color-app-text: var(--color-app-dark);
-  --color-app-border: #d7ddd2;
+  --color-app-border: #dcdfe3;
   --color-app-input-border: #92998f;
   --color-app-shell: #ffffff;
-  --color-app-answer: #eef1e9;
-  --color-app-card: #fafbf7;
+  --color-app-answer: #edf4e8;
+  --color-app-card: #fafbfc;
+  --color-app-mode-spelling: #cce78b;
+  --color-app-mode-lookup: #c5c5f3;
+  --color-app-glow-lime: #e5edb5;
+  --color-app-glow-mint: #c5e9dc;
+  --color-app-glow-lavender: #dedbf5;
   --color-app-control-hover: #eceeeb;
   --color-app-control-active: #dfe3de;
   --color-app-accent: #ffd54f;
