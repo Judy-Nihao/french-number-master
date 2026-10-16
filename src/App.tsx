@@ -40,6 +40,7 @@ const App = () => {
             <div ref={alignmentRef}>
               {/* Main Exercise Card */}
               <Card
+                data-mode={mode === "test" ? "spelling" : "lookup"}
                 state={
                   mode === "test" && practice.feedback === "incorrect"
                     ? "incorrect"

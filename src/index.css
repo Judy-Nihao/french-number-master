@@ -85,6 +85,29 @@ body {
     radial-gradient(ellipse at 5% 115%, var(--color-app-glow-lime), transparent 60%);
 }
 
+.exercise-surface[data-mode="lookup"] {
+  background-image:
+    radial-gradient(ellipse at 100% 110%, var(--color-app-glow-lavender), transparent 65%),
+    radial-gradient(ellipse at 0% 110%, var(--color-app-glow-mint), transparent 58%);
+}
+
+/* A small inset bookmark identifies the mode without adding a header row. */
+.exercise-surface::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  width: 64px;
+  height: 6px;
+  border-radius: 0 0 6px 6px;
+  background: var(--color-app-mode-spelling);
+  pointer-events: none;
+}
+
+.exercise-surface[data-mode="lookup"]::before {
+  background: var(--color-app-mode-lookup);
+}
+
 ::selection {
   background-color: var(--color-app-primary-light);
   color: var(--color-app-dark);
