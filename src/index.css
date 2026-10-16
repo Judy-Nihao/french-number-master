@@ -78,6 +78,13 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Static, transparent color pools keep the center quiet and never change layout. */
+.exercise-surface {
+  background-image:
+    radial-gradient(ellipse at 96% 100%, var(--color-app-glow-mint), transparent 62%),
+    radial-gradient(ellipse at 5% 115%, var(--color-app-glow-lime), transparent 60%);
+}
+
 ::selection {
   background-color: var(--color-app-primary-light);
   color: var(--color-app-dark);
