@@ -28,13 +28,9 @@ const App = () => {
         <div className="w-full max-w-lg flex flex-col gap-4 relative">
           {/* Header */}
           <header className="@container relative px-3 text-left md:px-6">
-            <h1 className="flex flex-col items-start gap-1 font-sans font-bold tracking-[-0.035em] text-app-dark">
-              <span className="flex w-full items-end justify-between gap-2">
-                <span className="font-display text-[clamp(2.75rem,11cqi,3.5rem)] leading-none font-medium italic">
-                  French <span aria-hidden="true" className="inline-block align-middle font-sans text-[0.75em] not-italic tracking-normal">🇫🇷</span>
-                </span>
-              </span>
-              <span className="text-[clamp(1.75rem,8cqi,2.5rem)] leading-tight tracking-normal">Number Master <span aria-hidden="true" className="inline-block align-middle text-[0.75em]">🏆</span></span>
+            <h1 className="flex w-fit max-w-full items-baseline gap-2 whitespace-nowrap text-[clamp(0.875rem,5cqi,1.25rem)] leading-tight font-normal tracking-normal text-app-dark">
+              <span className="font-mono">French Number Master</span>
+              <span aria-hidden="true" className="font-kaomoji">{"(ﾉ´ з `)ノ"}</span>
             </h1>
           </header>
 
