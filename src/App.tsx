@@ -27,9 +27,9 @@ const App = () => {
       >
         <div className="w-full max-w-lg flex flex-col gap-4 relative">
           {/* Header */}
-          <header className="@container relative px-3 text-left md:px-6">
+          <header className="@container relative flex justify-center px-3 md:px-6">
             <h1 className="flex w-fit max-w-full items-baseline gap-2 whitespace-nowrap text-[clamp(0.875rem,5cqi,1.25rem)] leading-tight font-normal tracking-normal text-app-dark">
-              <span className="font-mono">French Number Master</span>
+              <span className="font-mono font-medium">French Number Master</span>
               <span aria-hidden="true" className="font-kaomoji">{"(ﾉ´ з `)ノ"}</span>
             </h1>
           </header>
