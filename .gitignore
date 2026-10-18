@@ -13,3 +13,6 @@ coverage/
 !/README.md
 /docs/
 /.impeccable/
+
+# Locally generated speech audio and generation metadata
+/assets/audio-generated/
