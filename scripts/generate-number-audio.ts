@@ -10,8 +10,8 @@ const main = async () => {
   if (!input || !/^\d+$/.test(input))
     throw new Error("Specify one number: --number 0. Add --generate to call the paid API.");
   const number = Number(input);
-  if (!Number.isInteger(number) || number < 0 || number > 100)
-    throw new Error("This local audio script accepts integers from 0 to 100.");
+  if (!Number.isSafeInteger(number) || number < 0 || number > 999999999999999)
+    throw new Error("This local audio script accepts integers from 0 to 999999999999999.");
 
   const voiceId = process.env.ELEVENLABS_VOICE_ID;
   const v3 = args.includes("--v3");
