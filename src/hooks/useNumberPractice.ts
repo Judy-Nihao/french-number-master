@@ -30,12 +30,15 @@ export const useNumberPractice = () => {
   const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(
     null,
   );
-  const { isPlaying, speak } = useFrenchSpeech();
+  const { isPlaying, speak, cancel } = useFrenchSpeech();
   const [lookupValue, setLookupValue] = useState<string>("");
   const [lookupResult, setLookupResult] = useState<FrenchRepresentation | null>(
     null,
   );
   const [mode, setMode] = useState<PracticeMode>("test");
+  useEffect(() => {
+    cancel();
+  }, [currentNumber, lookupValue, mode, cancel]);
   const reducedMotion = useReducedMotion();
   const poolRef = useRef<number[]>([]);
   const lastNumberRef = useRef<number | null>(null);
@@ -43,6 +46,7 @@ export const useNumberPractice = () => {
   const focusNextQuestionRef = useRef(false);
 
   const generateRandomNumber = useCallback(() => {
+    cancel();
     const rangeSize = maxRange - minRange + 1;
     if (rangeSize <= 0) return;
 
@@ -84,7 +88,7 @@ export const useNumberPractice = () => {
     setKeyboardHint(false);
     setUserInput("");
     setFeedback(null);
-  }, [minRange, maxRange]);
+  }, [minRange, maxRange, cancel]);
 
   useEffect(() => {
     generateRandomNumber();
@@ -123,7 +127,7 @@ export const useNumberPractice = () => {
   };
 
   const playLookupAudio = () => {
-    if (lookupResult?.ipa) speak(lookupResult.word);
+    if (lookupResult?.ipa) speak(Number(lookupValue), lookupResult.word);
   };
 
   const handleRangeInput =
@@ -217,7 +221,7 @@ export const useNumberPractice = () => {
 
   const playAudio = () => {
     if (currentNumber !== null) {
-      speak(getFrenchRepresentation(currentNumber).word, {
+      speak(currentNumber, getFrenchRepresentation(currentNumber).word, {
         rate: 0.9,
         resume: true,
       });
