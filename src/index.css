@@ -91,11 +91,6 @@ body {
     radial-gradient(circle 125px at 40% 38%, var(--color-app-glow-mint) 12%, transparent 100%);
 }
 
-::selection {
-  background-color: var(--color-app-primary-light);
-  color: var(--color-app-dark);
-}
-
 input,
 textarea {
   caret-color: var(--color-app-dark);
